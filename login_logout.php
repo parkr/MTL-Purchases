@@ -19,12 +19,17 @@ if(isset($_COOKIE["loggedin"])){
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Log In: Montreal</title>
 	<meta name="author" content="Parker Moore">
+	<link href="default.css" rel="stylesheet" media="screen">
+	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
+	<script src="/mtl.js" type="text/javascript"></script>
 	<!-- Date: 2010-12-27 -->
 </head>
 <body>
-	<h1>Log In</h1>
-	<?php echo isset($error) ? $error : ""; ?>
-	<form action="/login" method="post"><input name="username" type="text" /><input name="password" type="password" /><input type="submit"></form>
+	<div id="container">
+		<h1>Log In</h1>
+		<?php echo isset($error) ? $error : ""; ?>
+		<form action="/login" method="post"><input name="username" type="text" /><input name="password" type="password" /><input type="submit"></form>
+	</div>
 </body>
 </html>
 	

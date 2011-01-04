@@ -1,5 +1,5 @@
 <?php
-#
+# Returns one data set for one purchase.
 function getPurchase($purchase_id){
 	include_once('db.inc.php');
 	$purchase = array();
@@ -67,7 +67,8 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = ""){
 	}
 }
 
-#
+# formats the date from the MySQL DATETIME format a more readable version
+# e.g. "2010-10-10 10:10:10" is converted to "Oct, 10"
 function formatDate($date){
 	$year = substr($date, 0, 4);
 	$month = substr($date, 5, 2);
@@ -86,7 +87,9 @@ function formatActions($actions){
 	return $actionOutput;
 }
 
-#
+# returns an array of the 4 different payment options, each containing a string.
+# whichever payment is selected (in the database) will return the string 'checked = "checked"' for the form item
+# for the edit page
 function getSelectedPayment($payment_type){
 	$selected = array();
 	$selected['CASH'] = ($payment_type == "CASH" ? " checked=\"checked\"" : "");
@@ -96,7 +99,9 @@ function getSelectedPayment($payment_type){
 	return $selected;
 }
 
-#
+# returns an array of the 4 different cards, each containing a string.
+# whichever card is selected (in the database) will return the string 'checked = "checked"' for the form item
+# for the edit page
 function getSelectedCard($card){
 	$selected = array();
 	$selected['NULL'] = ($card == null ? " selected=\"selected\"" : "");
@@ -157,7 +162,7 @@ function jumpMenu(){
 	return $output;
 }
 
-#
+# code to add a transaction to the database
 function addToDatabase($post){
 	include_once('db.inc.php');
 	
@@ -171,15 +176,15 @@ function addToDatabase($post){
 	$items = $post['items'];
 	
 	if($card == "NULL"){
-		$query = "INSERT INTO `parkrm04_life`.`montreal_purchases` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', NULL, '$currency', '$amount', '$purpose', '$items')";
+		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', NULL, '$currency', '$amount', '$purpose', '$items')";
 	}else{
-		$query = "INSERT INTO `parkrm04_life`.`montreal_purchases` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', '$card', '$currency', '$amount', '$purpose', '$items')";
+		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', '$card', '$currency', '$amount', '$purpose', '$items')";
 	}
 	mysql_query($query) or die(mysql_error());
 	header("Location: http://mtl.parkr.me");
 }
 
-#
+# code to edit / update this particular transaction in the database
 function updateInDatabase($post){
 	include_once('db.inc.php');
 	
@@ -194,9 +199,9 @@ function updateInDatabase($post){
 	$items = $post['items'];
 	
 	if($card == "NULL"){
-		$query = "UPDATE `parkrm04_life`.`montreal_purchases` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = NULL, `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
+		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = NULL, `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
 	}else{
-		$query = "UPDATE `parkrm04_life`.`montreal_purchases` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = '$card', `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
+		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = '$card', `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
 	}
 	mysql_query($query) or die(mysql_error());
 	header("Location: http://mtl.parkr.me");
