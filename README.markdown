@@ -1,4 +1,6 @@
-=== A PHP Web App that allows me to view my Montreal purchases all in one place.
+# A PHP Web App that allows me to view my Montreal purchases all in one place.
 
-# To-Do: Add search features!
-# Also, learn Markdown.
+## To-Do: 
+
+1. Add search features!
+2. Also, learn Markdown.
