@@ -165,7 +165,7 @@ function jumpMenu(){
 # code to add a transaction to the database
 function addToDatabase($post){
 	include_once('db.inc.php');
-	
+
 	$datetime = $post['datetime'];
 	$business_id = $post['business_id'];
 	$payment_type = $post['payment_type'];
@@ -174,7 +174,7 @@ function addToDatabase($post){
 	$amount = $post['amount'];
 	$purpose = $post['purpose'];
 	$items = $post['items'];
-	
+
 	if($card == "NULL"){
 		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', NULL, '$currency', '$amount', '$purpose', '$items')";
 	}else{
@@ -187,7 +187,7 @@ function addToDatabase($post){
 # code to edit / update this particular transaction in the database
 function updateInDatabase($post){
 	include_once('db.inc.php');
-	
+
 	$id = $post['id'];
 	$datetime = $post['datetime'];
 	$business_id = $post['business_id'];
@@ -197,7 +197,7 @@ function updateInDatabase($post){
 	$amount = $post['amount'];
 	$purpose = $post['purpose'];
 	$items = $post['items'];
-	
+
 	if($card == "NULL"){
 		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = NULL, `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
 	}else{
