@@ -45,3 +45,25 @@ table#purchases {
 #purchases td.altcol {
 	background-color:#ff0;
 }
+
+/************* Format Add Stuff ***************/
+.add {
+	background-color: rgba(11,97,162,0.7);
+	color: #fff;
+	padding: 40px;
+	width: 0px;
+	height: 0px;
+	border: rgba(125,125,125,0.3) solid 7px;
+	border-radius: 35px;
+	z-index: 1;
+}
+
+.hide {
+	overflow: hidden;
+}
+
+.footnote {
+	font-size: 12px;
+	color: #ccc;
+	text-align:center;
+}

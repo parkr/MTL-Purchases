@@ -21,9 +21,9 @@ foreach ($_GET as $key => $value){
 <script src="/mtl.js" type="text/javascript"></script>
 </head>
 
-<body><div id="container"><h1 align="center">Add Purchase</h1><form action="/submit" method="post" name="add">
+<body><div id="container"><h1 align="center">Add Purchase</h1><form method="post" name="add" action="/submit">
 <input name="action" type="hidden" value="add" />
-<table width="700" border="0" cellspacing="0" cellpadding="0" style="width:700px;margin:0 auto;">
+<table width="700" border="0" cellspacing="0" cellpadding="0" style="width:600px;margin:0 auto;padding:0">
   <tr>
     <td>Date:</td>
     <td><input name="datetime" type="text" /> <span class="format">(Format: YYYY-MM-DD HH:MM:SS)</span></td>
@@ -77,13 +77,13 @@ foreach ($_GET as $key => $value){
   </tr>
   <tr>
     <td>Purpose:</td>
-    <td><textarea name="purpose" id="purpose" cols="45" rows="5"></textarea>
-      (comma-separated)</td>
+    <td><textarea name="purpose" id="purpose" cols="45" rows="5"></textarea><br/>
+      <span class="footnote">(comma-separated)</span></td>
   </tr>
   <tr>
     <td>Items:</td>
-    <td><textarea name="items" id="items" cols="45" rows="5"></textarea> 
-      (comma-separated)</td>
+    <td><textarea name="items" id="items" cols="45" rows="5"></textarea><br/>
+      <span class="footnote">(comma-separated)</span></td>
   </tr>
   	<tr>
 		<td></td>

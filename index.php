@@ -53,8 +53,10 @@ if($q){
 		?>
 		</table>
 		<div id="jumping"><?php echo jumpMenu(); ?></div>
-		<div id="addLink"><a onclick="add();">Add</a></div>
+		<div id="addLink" onclick="add()">Add</div>
+		<div id="addBusinessLink" onclick="getAddPage()">Add Venue</div>
 	</div>
+	<div id="add" class="hide"></div>
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();

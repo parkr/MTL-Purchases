@@ -1,8 +1,12 @@
 function repositionAdd(){
 	$("#addLink").css('position', 'absolute');
 	$("#addLink").css('left', $("#container").offset().left+940);
-	$("#addLink").css('top', 20);
+	$("#addLink").css('top', 7);
 	$("#addLink").css('font-size', 30);
+	$("#addBusinessLink").css('position', 'absolute');
+	$("#addBusinessLink").css('left', $("#container").offset().left+840);
+	$("#addBusinessLink").css('top', 40);
+	$("#addBusinessLink").css('font-size', 30);
 }
 
 function repositionJump(){
@@ -26,12 +30,36 @@ function jump(targ,selObj,restore){
 
 function add(){
 	window.location = "/add";
-	/*$.ajax({
-	   type: "POST",
-	   url: "submit.php",
-	   data: "",
-	   success: function(msg){
-	     //alert( "Data Saved: " + msg );
-	   }
-	 });*/
+}
+
+function getAddPage(){
+	if($("div#add").height() < 200){
+		$("div#add").addClass("add");
+		$("div#add").animate({height:250},"slow");
+		$("div#add").animate({width:535}, "slow");
+		$("div#add").delay(1000).load("add_business.html");
+		$("#add").css('position', 'absolute');
+		$("#add").css('left', ($(window).width()/2)-(560/2));
+		$("#add").css('top', ($(window).height()/2)-(250/2));
+	}else{
+		$("div#add").animate({height:0}, "slow");
+		$("div#add").animate({width:0}, "slow").delay(10000).removeClass("add");
+	}
+}
+
+function urlencode (str) {
+    // URL-encodes string  
+    // %          note 1: This reflects PHP 5.3/6.0+ behavior
+    // %        note 2: Please be aware that this function expects to encode into UTF-8 encoded strings, as found on
+    // %        note 2: pages served as UTF-8
+    // *     example 1: urlencode('Kevin van Zonneveld!');
+    // *     returns 1: 'Kevin+van+Zonneveld%21'
+    // *     example 2: urlencode('http://kevin.vanzonneveld.net/');
+    // *     returns 2: 'http%3A%2F%2Fkevin.vanzonneveld.net%2F'
+    // *     example 3: urlencode('http://www.google.nl/search?q=php.js&ie=utf-8&oe=utf-8&aq=t&rls=com.ubuntu:en-US:unofficial&client=firefox-a');
+    // *     returns 3: 'http%3A%2F%2Fwww.google.nl%2Fsearch%3Fq%3Dphp.js%26ie%3Dutf-8%26oe%3Dutf-8%26aq%3Dt%26rls%3Dcom.ubuntu%3Aen-US%3Aunofficial%26client%3Dfirefox-a'
+    str = (str+'').toString();
+    // Tilde should be allowed unescaped in future versions of PHP (as reflected below), but if you want to reflect current
+    // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
+    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 }

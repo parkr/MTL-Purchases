@@ -12,6 +12,7 @@ RewriteRule ^logout$ /login_logout.php?action=logout [L]
 RewriteRule ^add$ /add.php?new=true [L]
 RewriteRule ^edit:([a-zA-Z0-9]*)$ /add.php?edit=$1 [L]
 RewriteRule ^submit$ /submit.php [L]
+RewriteRule ^test$ /test_ajax.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
