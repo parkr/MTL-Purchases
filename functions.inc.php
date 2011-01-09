@@ -77,6 +77,11 @@ function formatDate($date){
 	return date("M, j", mktime(0,0,0,$month,$day,$year));
 }
 
+# returns today's date in YYYY-MM-DD format
+function getCurrDate(){
+	return date("Y-m-d");
+}
+
 # returns string output of links for actions
 function formatActions($actions){
 	$actionOutput = "";

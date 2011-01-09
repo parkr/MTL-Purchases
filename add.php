@@ -26,7 +26,7 @@ foreach ($_GET as $key => $value){
 <table width="700" border="0" cellspacing="0" cellpadding="0" style="width:600px;margin:0 auto;padding:0">
   <tr>
     <td>Date:</td>
-    <td><input name="datetime" type="text" /> <span class="format">(Format: YYYY-MM-DD HH:MM:SS)</span></td>
+    <td><input name="datetime" type="text" value="<?php echo getCurrDate(); ?>" /> <span class="format footnote">(Format: YYYY-MM-DD HH:MM:SS)</span></td>
   </tr>
   <tr>
     <td>Business:</td>
