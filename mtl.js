@@ -32,6 +32,19 @@ function add(){
 	window.location = "/add";
 }
 
+function debitSelected(){
+	var form = document.inputform;
+	form.master.options[0] = null;
+	form.master.options[2] = null;
+}
+
+function debitUnselected(){
+	var form = document.inputform;
+	form.master.options[0] = new Option("NONE", "NULL", true, true);
+	form.master.options[1] = new Option("Interac", "RBC/Interac", false, false);
+	form.master.options[2] = new Option("Citizen's Bank", "Citizens Bank", false, false);
+}
+
 function getAddPage(){
 	if($("div#add").height() < 200){
 		$("div#add").addClass("add");

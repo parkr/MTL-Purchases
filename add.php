@@ -21,7 +21,7 @@ foreach ($_GET as $key => $value){
 <script src="/mtl.js" type="text/javascript"></script>
 </head>
 
-<body><div id="container"><h1 align="center">Add Purchase</h1><form method="post" name="add" action="/submit">
+<body><div id="container"><h1 align="center">Add Purchase</h1><form method="post" name="inputform" id="inputform" action="/submit">
 <input name="action" type="hidden" value="add" />
 <table width="700" border="0" cellspacing="0" cellpadding="0" style="width:600px;margin:0 auto;padding:0">
   <tr>
@@ -42,7 +42,7 @@ foreach ($_GET as $key => $value){
         Cash</label>
       <br />
       <label>
-        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1" />
+        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1" onfocus="debitSelected()" onblur="debitUnselected()" />
         Debit</label>
       <br />
       <label>
@@ -111,7 +111,7 @@ if(isset($_GET['edit'])): ?>
 </head>
 <?php $purchase = getPurchase($_GET['edit']); ?>
 
-<body><div id="container"><h1 align="center">Edit Purchase</h1><form action="/submit" method="post" name="add">
+<body><div id="container"><h1 align="center">Edit Purchase</h1><form action="/submit" method="post" name="inputform" id="inputform">
 <input name="id" type="hidden" value="<?php echo $purchase['id']; ?>" />
 <input name="action" type="hidden" value="edit" />
 <table width="700" border="0" cellspacing="0" cellpadding="0" style="width:700px;margin:0 auto;">
@@ -134,7 +134,7 @@ if(isset($_GET['edit'])): ?>
         Cash</label>
       <br />
       <label>
-        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1"<?php echo $isSelectedPayment['DEBIT']; ?> />
+        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1"<?php echo $isSelectedPayment['DEBIT']; ?> onfocus="debitSelected()" onblur="debitUnselected()" />
         Debit</label>
       <br />
       <label>
