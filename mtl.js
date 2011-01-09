@@ -32,17 +32,25 @@ function add(){
 	window.location = "/add";
 }
 
-function debitSelected(){
-	var form = document.inputform;
-	form.master.options[0] = null;
-	form.master.options[2] = null;
+function toggleDebitSelected(){
+	var form = document.getElementById("inputform");
+	if(form.debit.checked){
+		debitSelected(form);
+	}else{
+		debitUnselected(form);
+	}
 }
 
-function debitUnselected(){
-	var form = document.inputform;
-	form.master.options[0] = new Option("NONE", "NULL", true, true);
-	form.master.options[1] = new Option("Interac", "RBC/Interac", false, false);
-	form.master.options[2] = new Option("Citizen's Bank", "Citizens Bank", false, false);
+function debitSelected(form){
+	alert("Inputform "+inputform);
+	form.card.options[0] = null;
+	form.card.options[1] = null;
+}
+
+function debitUnselected(form){
+	form.card.options[0] = new Option("NONE", "NULL", true, true);
+	form.card.options[1] = new Option("Interac", "RBC/Interac", false, false);
+	form.card.options[2] = new Option("Citizen's Bank", "Citizens Bank", false, false);
 }
 
 function getAddPage(){

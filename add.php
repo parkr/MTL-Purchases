@@ -42,7 +42,7 @@ foreach ($_GET as $key => $value){
         Cash</label>
       <br />
       <label>
-        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1" onfocus="debitSelected()" onblur="debitUnselected()" />
+        <input type="radio" name="debit" value="DEBIT" id="debit" onclick="toggleDebitSelected()" />
         Debit</label>
       <br />
       <label>
@@ -134,7 +134,7 @@ if(isset($_GET['edit'])): ?>
         Cash</label>
       <br />
       <label>
-        <input type="radio" name="payment_type" value="DEBIT" id="payment_type_1"<?php echo $isSelectedPayment['DEBIT']; ?> onfocus="debitSelected()" onblur="debitUnselected()" />
+        <input type="radio" name="debit" value="DEBIT" id="debit"<?php echo $isSelectedPayment['DEBIT']; ?> onclick="toggleDebitSelected()" />
         Debit</label>
       <br />
       <label>
