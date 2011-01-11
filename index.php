@@ -3,8 +3,14 @@ if(!isset($_COOKIE["loggedin"])){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once('functions.inc.php');
-include_once('db.inc.php');
-if($q){
+if($s){
+	//echo $s . " ";
+	$search = clean_search($s);
+	//echo $search;
+	reroute("http://mtl.parkr.me/search/$search/");
+	$s = false;
+}elseif($q){
+	include_once('db.inc.php');
 	if($q == "asc"){
 		$q = false;
 		$query = "SELECT * FROM `".PURCHASES_TABLE."` ORDER BY `datetime` ASC";
@@ -30,6 +36,7 @@ if($q){
 		$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `datetime` >= '$beginning' AND `datetime` <= '$end' ORDER BY `datetime` ASC";
 	}
 }else{
+	include_once('db.inc.php');
 	$q = false;
 	$query = "SELECT * FROM `".PURCHASES_TABLE."` ORDER BY `datetime` DESC";
 }
@@ -57,9 +64,15 @@ if($q){
 		<div id="addBusinessLink" onclick="getAddPage()">Add Venue</div>
 	</div>
 	<div id="add" class="hide"></div>
+	<div id="searchwrapper"><form method="get" action="/">
+	<input type="text" class="searchbox" name="s" value="" />
+	<input type="image" src="magnifying_glass.png" class="searchbox_submit" value="" />
+	</form></div>
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();
+	repositionSearch();
+	repositionAddBLink();
 </script>
 </body>
 </html>

@@ -148,8 +148,8 @@ function printBusinessesinForm($selected = ""){
 	$businesses = getBusinesses();
 	# ouput
 	for($k=0; $k<count($businesses); $k++){
-		if($selected == $businesses[$k]['id']){$selected=" selected='selected'";}else{$selected="";}
-		echo '<option value="'.$businesses[$k]['id'].'"'.$selected.'>'.$businesses[$k]['place_name'].'</option>'."\n\t";
+		if($selected == $businesses[$k]['id']){$isselected=" selected='selected'";}else{$isselected="";}
+		echo '<option value="'.$businesses[$k]['id'].'"'.$isselected.'>'.$businesses[$k]['place_name'].'</option>'."\n\t";
 	}
 }
 
@@ -210,5 +210,16 @@ function updateInDatabase($post){
 	}
 	mysql_query($query) or die(mysql_error());
 	header("Location: http://mtl.parkr.me");
+}
+
+# clean up a search query
+function clean_search($search_query){
+	$search_query = urlencode($search_query);
+	return $search_query;
+}
+
+# reroute
+function reroute($new_page){
+	header("Location:$new_page");
 }
 ?>

@@ -3,6 +3,9 @@ function repositionAdd(){
 	$("#addLink").css('left', $("#container").offset().left+940);
 	$("#addLink").css('top', 7);
 	$("#addLink").css('font-size', 30);
+}
+
+function repositionAddBLink(){
 	$("#addBusinessLink").css('position', 'absolute');
 	$("#addBusinessLink").css('left', $("#container").offset().left+840);
 	$("#addBusinessLink").css('top', 40);
@@ -12,7 +15,7 @@ function repositionAdd(){
 function repositionJump(){
 	$("#jumping").css('position', 'absolute');
 	$("#jumping").css('left', $("#container").offset().left+30);
-	$("#jumping").css('top', 30);
+	$("#jumping").css('top', 10);
 	$("#jumping").css('font-size', 30);
 }
 
@@ -22,6 +25,14 @@ function repositionReturn(){
 	$("#return").css('top', 550);
 	$("#return").css('font-size', 30);
 }
+
+function repositionSearch(){
+	$("#searchwrapper").css('position', 'absolute');
+	$("#searchwrapper").css('left', $("#container").offset().left);
+	$("#searchwrapper").css('top', 40);
+	$("#searchwrapper").css('font-size', 30);
+}
+
 
 function jump(targ,selObj,restore){
   eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
