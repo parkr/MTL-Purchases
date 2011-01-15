@@ -25,6 +25,20 @@ $total_spent = getTotalSpent();
 	<title>Purchases in Montréal</title>
 	<link href="/default.css" rel="stylesheet" media="screen" />
 	<style type="text/css">
+		body {
+			background-color:rgba(242, 226, 5, 0.5);
+		}
+		#background {
+			position:absolute;
+			top:0;
+			left:0;
+			background-image:url('/pinstripes.png');
+			filter:alpha(opacity=20);
+			height:100%;
+			min-height:1000px;
+			width:100%;
+			opacity:.30;
+		}
 		.small_box {
 			width:400px;
 			padding:10px;
@@ -32,31 +46,41 @@ $total_spent = getTotalSpent();
 			margin:5px;
 			float:left;
 			height:300px;
-			font-size:48px;
+			font-size:64px;
+			text-align:center;
+		}
+		#clear {
+			padding:0;
+			margin:0;
+			top:200px;
+		}
+		#data_logo {
+			margin: 0 auto;
+			width:234px;
 		}
 	</style>
 	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script>
 	<script src="/mtl.js" type="text/javascript"></script>
 </head>
 <body>
-	<div id="container">
-		<header><a href="/" id="data_logo"><img src="/data.png" height="154" width="234" border="0"></a></header>
-		<section class="small_box" id="total_spent">
-			$<?php echo $total_spent."\n"; ?>
-		</section><!-- Total Spent -->
-		<section class="small_box" id="average_spent"><!-- Average Spent (Per Day) --></section>
-		<section class="small_box" id="top_reasons"><!-- Top Reasons --></section>
-		<section class="small_box" id="top_items"><!-- Top Items --></section>
-		<section class="small_box" id="top_businesses"><!-- Top Businesses --></section>
-		<section class="small_box" id="top_payment_types"><!-- Top Payment Types --></section>
-		<section class="large_box" id="spending_by_date"><!-- Graph of Spending By Date --></section>
+	<div id="background">&nbsp;</div>
+	<div id="container" style="width:860px;z-index:1">
+		<header id="data_logo"><a href="/"><img src="/data.png" height="154" width="234" border="0"></a></header>
+		<section id="clear">
+			<section class="small_box" id="total_spent">
+				$<?php echo $total_spent."\n"; ?>
+			</section><!-- Total Spent -->
+			<section class="small_box" id="average_spent"><!-- Average Spent (Per Day) --></section>
+			<section class="small_box" id="top_reasons"><!-- Top Reasons --></section>
+			<section class="small_box" id="top_items"><!-- Top Items --></section>
+			<section class="small_box" id="top_businesses"><!-- Top Businesses --></section>
+			<section class="small_box" id="top_payment_types"><!-- Top Payment Types --></section>
+			<section class="large_box" id="spending_by_date"><!-- Graph of Spending By Date --></section>
+		</section>
 	</div>
 	<script type="text/javascript">
 	<!--
-		$("#data_logo").css('position', 'absolute');
-		$("#data_logo").css('left', $("#container").offset().left+(($("#container").width()/2)-($("#data_logo").width()/2)));
-		$("#data_logo").css('top', 10);
-		$("#data_logo").css('font-size', 30);
+		//$("#clear").css('top', 200);
 	// -->
 	</script>
 </body>
