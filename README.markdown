@@ -6,5 +6,7 @@ Make a very simple way to view, edit, add, delete, sort and search through MySQL
 
 ## To-Do: 
 
-1. Add search features
-2. Create ability to count WHAT and WHY I'm buying these items.
+1. Fix search features
+	a. Ability to specify what field
+	b. Fix problem with spaces in query
+2. Create ability to count WHAT and WHY I'm buying these items. (data page)
