@@ -1,10 +1,12 @@
 <?php
 include('db.inc.php');
 if(isset($_COOKIE["loggedin"])){
+	echo "cookie set.";
 	header("Location: http://mtl.parkr.me");
 }else{
 	if(isset($_POST['username']) && isset($_POST['password'])){
 		if($_POST['username'] == USERNAME && $_POST['password'] == USERPASS){
+			echo "setting cookie.";
 			setcookie("loggedin", "true", time()+(60*60*12));
 			header("http://mtl.parkr.me/login");
 		}else{

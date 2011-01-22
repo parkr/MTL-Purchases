@@ -1,2 +1,8 @@
-cgi-bin/
+.DS_Store
 db.inc.php
+error_log
+.ai
+.Trashes
+ignore/
+ignore/*
+cgi-bin/
