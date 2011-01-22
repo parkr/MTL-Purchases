@@ -1,0 +1,104 @@
+html, body {
+	margin:0;
+	padding:0;
+	font-family: "Geneva", "Lucida Grande", Helvetica, sans-serif;
+	clear:both;
+}
+
+div#container {
+	width:1000px;
+	margin:0 auto;
+	padding:0;
+}
+
+
+/************* Format Table ***************/
+table#purchases {
+	width:1000px;
+	margin:0 auto;
+	padding:0;
+	text-align:center;
+}
+
+#purchases tr {
+	height:100px;
+	width:900px;
+	padding:0;
+}
+
+#purchases tr.altrow {
+	background-color: #ddd;
+}
+
+#purchases tr.actions {
+	background-color: #aaa;
+	height:50px;
+}
+
+#purchases td {
+	margin: 10px;
+	overflow-y:auto;
+	max-height:100px;
+	padding:0;
+}
+
+#purchases td.altcol {
+	background-color:#ff0;
+}
+
+/************* Format Add Stuff ***************/
+.add {
+	background-color: rgba(11,97,162,0.7);
+	color: #fff;
+	padding: 40px;
+	width: 0px;
+	height: 0px;
+	border: rgba(125,125,125,0.3) solid 7px;
+	border-radius: 35px;
+	z-index: 1;
+}
+
+.hide {
+	overflow: hidden;
+}
+
+.footnote {
+	font-size: 12px;
+	color: #ccc;
+	text-align:center;
+}
+
+/******************** SEARCH BABY SEARCH *********************/
+#searchwrapper {
+width:319px; /*follow your image's size*/
+height:48px;/*follow your image's size*/
+background-image:url("searchbox.jpg");
+background-repeat:no-repeat; /*important*/
+padding:0px;
+margin:0px;
+position:relative; /*important*/
+}
+ 
+#searchwrapper form { display:inline ; }
+ 
+.searchbox {
+border:0px; /*important*/
+background-color:transparent; /*important*/
+position:absolute; /*important*/
+top:4px;
+left:9px;
+width:256px;
+height:28px;
+color: #fff;
+font-size: 18px;
+}
+ 
+.searchbox_submit {
+border:0px; /*important*/
+background-color:transparent; /*important*/
+position:absolute; /*important*/
+top:4px;
+left:265px;
+width:32px;
+height:28px;
+}

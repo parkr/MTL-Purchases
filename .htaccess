@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^$ /index.php [L]
+RewriteRule ^asc$ /index.php?q=asc [L]
+RewriteRule ^after:([a-zA-Z0-9]*)$ /index.php?q=after&purchase_id=$1 [L]
+RewriteRule ^before:([a-zA-Z0-9]*)$ /index.php?q=before&purchase_id=$1 [L]
+RewriteRule ^fall-2010$ /index.php?q=fall2010 [L]
+RewriteRule ^winter-2011$ /index.php?q=winter2011 [L]
+RewriteRule ^login$ /login_logout.php?action=login [L]
+RewriteRule ^logout$ /login_logout.php?action=logout [L]
+RewriteRule ^add$ /add.php?new=true [L]
+RewriteRule ^edit:([a-zA-Z0-9]*)$ /add.php?edit=$1 [L]
+RewriteRule ^submit$ /submit.php [L]
+RewriteRule ^test$ /test_ajax.php [L]
+RewriteRule ^search/([a-zA-Z0-9]*)/$ /search.php?q=$1 [L]
+RewriteRule ^search/?q=([a-zA-Z0-9]*)$ /search.php?q=$1 [L]
+RewriteRule ^data$ /data.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+AddType application/python py
+AddType application/x-httpd-python py

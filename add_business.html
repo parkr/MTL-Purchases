@@ -1,0 +1,23 @@
+<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+	function submitt(){
+		var place_namey = urlencode($("#place_name").val());
+		var addressy = urlencode($("#address").val());
+		var phoney = urlencode($("#phone").val());
+		$.post(
+			"add_business.php",
+			{place_name: place_namey, address: addressy, phone: phoney},
+			function(){
+				$("#place_name").val("Success!");
+			}
+		);
+	}
+</script>
+<div id="form">
+	<form onsubmit="submitt()" method='post'>
+		<input type='text' name='place_name' id='place_name' style='font-size:18px;padding:10px' cols="50"><br />
+		<textarea cols='45' rows='5' id='address' name='address' style='font-size:18px;padding:10px'></textarea><br />
+		<input type='text' name='phone' id='phone' style='font-size:18px;padding:10px' value="+1" cols="50"><br />
+		<input type='submit' value='Add Business' style='font-size:18px;padding:10px'>
+	</form>
+</div>
