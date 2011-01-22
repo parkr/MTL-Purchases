@@ -1,12 +1,18 @@
 <?php
 include('db.inc.php');
 if(isset($_COOKIE["loggedin"])){
+<<<<<<< HEAD
 	echo "cookie set.";
+=======
+>>>>>>> 70ee3738926d7fd9fd5d9ac153e89615c5dc5b6c
 	header("Location: http://mtl.parkr.me");
 }else{
 	if(isset($_POST['username']) && isset($_POST['password'])){
 		if($_POST['username'] == USERNAME && $_POST['password'] == USERPASS){
+<<<<<<< HEAD
 			echo "setting cookie.";
+=======
+>>>>>>> 70ee3738926d7fd9fd5d9ac153e89615c5dc5b6c
 			setcookie("loggedin", "true", time()+(60*60*12));
 			header("http://mtl.parkr.me/login");
 		}else{
