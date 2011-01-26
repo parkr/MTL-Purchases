@@ -68,6 +68,11 @@ table#purchases {
 	text-align:center;
 }
 
+#inputform {
+	margin: 0 auto;
+	width:600px;
+}
+
 /******************** SEARCH BABY SEARCH *********************/
 #searchwrapper {
 width:319px; /*follow your image's size*/

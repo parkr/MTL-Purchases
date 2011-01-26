@@ -10,6 +10,10 @@ if(isset($_POST)){
 		addToDatabase($_POST);
 	}elseif($_POST['action'] == "edit"){
 		updateInDatabase($_POST);
+	}elseif($_POST['action'] == "add_business"){
+		addBusiness($_POST);
+	}elseif($_POST['action'] == "edit_business"){
+		updateBusiness($_POST);
 	}else{
 		echo "There was a problem with your request.";
 	}

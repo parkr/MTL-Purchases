@@ -212,6 +212,51 @@ function updateInDatabase($post){
 	header("Location: http://mtl.parkr.me");
 }
 
+function addBusiness($post){
+	include_once('db.inc.php');
+	$place_name = $post['place_name'];
+	$address = $post['address'];
+	$phone = $post['phone'];
+	if($phone == "+1"){
+		$phone = "";
+	}
+	if($phone == "" || $address == ""){
+		if($phone == "" && $address == ""){
+			mysql_query("INSERT INTO `".BUSINESSES_TABLE."` (`place_name`, `address`, `phone`) VALUES ('$place_name', NULL, NULL)") or die(mysql_error());
+		}elseif($phone == "" && $address != ""){
+			mysql_query("INSERT INTO `".BUSINESSES_TABLE."` (`place_name`, `address`, `phone`) VALUES ('$place_name', '$address', NULL)") or die(mysql_error());
+		}elseif($phone != "" && $address == ""){
+			mysql_query("INSERT INTO `".BUSINESSES_TABLE."` (`place_name`, `address`, `phone`) VALUES ('$place_name', NULL, '$phone')") or die(mysql_error());
+		}
+	}else{
+		mysql_query("INSERT INTO `montreal_businesses` (`place_name`, `address`, `phone`) VALUES ('$place_name', '$address', '$phone')") or die(mysql_error());
+	}
+	header("Location: http://mtl.parkr.me");
+}
+
+function updateBusiness($post){
+	include_once('db.inc.php');
+	$id = $post['id'];
+	$place_name = $post['place_name'];
+	$address = $post['address'];
+	$phone = $post['phone'];
+	if($phone == "+1"){
+		$phone = "";
+	}
+	if($phone == "" || $address == ""){
+		if($phone == "" && $address == ""){
+			mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = NULL, `phone` = NULL WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
+		}elseif($phone == "" && $address != ""){
+			mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = '$address', `phone` = NULL WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
+		}elseif($phone != "" && $address == ""){
+			mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = NULL, `phone` = '$phone' WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
+		}
+	}else{
+		mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = '$address', `phone` = '$phone' WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
+	}
+	header("Location: http://mtl.parkr.me");
+}
+
 # clean up a search query
 function clean_search($search_query){
 	$search_query = urlencode($search_query);

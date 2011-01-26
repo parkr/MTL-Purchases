@@ -15,7 +15,7 @@ if($q){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Purchases in Montréal</title>
+<title>Search: Purchases in Montréal</title>
 <link href="/default.css" rel="stylesheet" media="screen">
 <script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/mtl.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@ if($q){
 
 <body>
 	<div id="container">
-		<h1 align="center">Purchases in Montréal</h1>
+		<h1 align="center">Search: Purchases in Montréal</h1>
 		<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">
 		<?php 
 		if($q){
@@ -34,7 +34,6 @@ if($q){
 		?>
 		</table>
 		<div id="jumping"><?php echo jumpMenu(); ?></div>
-		<div id="addLink" onclick="add()">Add</div>
 	</div>
 	<div id="add" class="hide"></div>
 	<div id="searchwrapper"><form method="get" action="/index.php">

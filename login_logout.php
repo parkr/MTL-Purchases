@@ -6,7 +6,7 @@ if(isset($_COOKIE["loggedin"])){
 	if(isset($_POST['username']) && isset($_POST['password'])){
 		if($_POST['username'] == USERNAME && $_POST['password'] == USERPASS){
 			setcookie("loggedin", "true", time()+(60*60*12));
-			header("http://mtl.parkr.me/login");
+			header("http://mtl.parkr.me");
 		}else{
 			$error = "<h3>Username/Password was incorrect</h3>";
 		}

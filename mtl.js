@@ -65,7 +65,7 @@ function debitUnselected(form){
 }
 
 function getAddPage(){
-	if($("div#add").height() < 200){
+	/*if($("div#add").height() < 200){
 		$("div#add").addClass("add");
 		$("div#add").animate({height:250},"slow");
 		$("div#add").animate({width:535}, "slow");
@@ -76,7 +76,8 @@ function getAddPage(){
 	}else{
 		$("div#add").animate({height:0}, "slow");
 		$("div#add").animate({width:0}, "slow").delay(10000).removeClass("add");
-	}
+	}*/
+	window.location = "/add_business";
 }
 
 function urlencode (str) {
