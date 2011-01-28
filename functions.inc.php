@@ -22,7 +22,7 @@ function getPurchase($purchase_id){
 
 # $result is a mysql result
 # returns array ($purchases[$i]['field_name']) with all purchases from that result
-function processPurchases($result, $stringTableFormat = false, $baseTab = ""){
+function processPurchases($result, $stringTableFormat = false, $baseTab = "", $search = false, $searched = ""){
 	/*
 	1. Check if $result is valid mysql result
 	2. Create array
@@ -39,7 +39,11 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = ""){
 			$purchases[$j]['currency'] = mysql_result($result, $j, 'currency');
 			$purchases[$j]['amount'] = mysql_result($result, $j, 'amount');
 			$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
-			$purchases[$j]['items'] = mysql_result($result, $j, 'items');
+			if($search){
+				$purchases[$j]['items'] = highlight($searched, mysql_result($result, $j, 'items'));
+			}else{
+				$purchases[$j]['items'] = mysql_result($result, $j, 'items');
+			}
 			$purchases[$j]['actions'] = array('edit' => '/edit:'.$purchases[$j]['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id']);
 		}
 		if($stringTableFormat){
@@ -52,7 +56,7 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = ""){
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['payment_type']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['card']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['currency']."</td>\n");
-				$output .= ($baseTab . "\t<td>" . $purchases[$p]['amount']."</td>\n");
+				$output .= ($baseTab . "\t<td>$" . $purchases[$p]['amount']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['purpose']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['items']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . formatActions($purchases[$p]['actions'])."</td>\n");
@@ -266,5 +270,16 @@ function clean_search($search_query){
 # reroute
 function reroute($new_page){
 	header("Location:$new_page");
+}
+
+# special echo
+function show($what){
+	echo "<span class='centered'>$what</span>";
+}
+
+# highlight the inputted text
+function highlight($what, $where){
+	# search in where for what
+	return str_ireplace($what, "<span class='highlighted'>$what</span>", $where);
 }
 ?>

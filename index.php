@@ -65,14 +65,11 @@ $_POST = null;
 		<div id="addBusinessLink" onclick="getAddPage()">Add Venue</div>
 	</div>
 	<div id="add" class="hide"></div>
-	<div id="searchwrapper"><form method="get" action="/">
-	<input type="text" class="searchbox" name="s" value="" />
-	<input type="image" src="magnifying_glass.png" class="searchbox_submit" value="" />
-	</form></div>
+	<div id="search" onclick="goToSearch();">Search</div>
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();
-	repositionSearch();
+	repositionSearch("index");
 	repositionAddBLink();
 </script>
 </body>

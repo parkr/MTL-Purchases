@@ -6,9 +6,10 @@ include_once('functions.inc.php');
 include_once('db.inc.php');
 if($q){
 	$q = urlencode(mysql_real_escape_string($q));
+	$q = urldecode($q);
 	$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q }%' ORDER BY `datetime` ASC";
 }else{
-	$error = "You crazy, bitchhh.";
+	$error = "Please enter a query.";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -27,7 +28,12 @@ if($q){
 		<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">
 		<?php 
 		if($q){
-			processPurchases(mysql_query($query), true, "\t\t");
+			$result = mysql_query($query);
+			if(mysql_num_rows($result) > 0){
+				processPurchases($result, true, "\t\t", true, "$q");
+			}else{
+				show("Nothing was found.");
+			}
 		}else{
 			echo $error;
 		}
@@ -43,7 +49,7 @@ if($q){
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();
-	repositionSearch();
+	repositionSearch("search");
 </script>
 </body>
 </html>

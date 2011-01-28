@@ -26,13 +26,27 @@ function repositionReturn(){
 	$("#return").css('font-size', 30);
 }
 
-function repositionSearch(){
-	$("#searchwrapper").css('position', 'absolute');
-	$("#searchwrapper").css('left', $("#container").offset().left);
-	$("#searchwrapper").css('top', 40);
-	$("#searchwrapper").css('font-size', 30);
+function repositionSearch(page){
+	if(page == "search"){
+		$("#searchwrapper").css('position', 'absolute');
+		$("#searchwrapper").css('left', $("#container").offset().left+(($("#container").width()/2)-($("#searchwrapper").width()/2)));
+		$("#searchwrapper").css('top', 70);
+		$("#searchwrapper").css('font-size', 30);
+		$("#jumping").css('top', 33);
+		$("#purchases").css('margin-top', 55)
+	}else{
+		if(page == "index"){
+			$("#search").css('position', 'absolute');
+			$("#search").css('left', $("#container").offset().left);
+			$("#search").css('top', 40);
+			$("#search").css('font-size', 30);
+		}
+	}
 }
 
+function goToSearch(){
+	window.location = "/search";
+}
 
 function jump(targ,selObj,restore){
   eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
