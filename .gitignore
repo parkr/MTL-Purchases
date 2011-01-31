@@ -5,7 +5,4 @@ error_log
 .Trashes
 ignore/
 ignore/*
-<<<<<<< HEAD
 cgi-bin/
-=======
->>>>>>> 70ee3738926d7fd9fd5d9ac153e89615c5dc5b6c
