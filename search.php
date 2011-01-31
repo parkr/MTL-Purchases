@@ -7,7 +7,7 @@ include_once('db.inc.php');
 if($q){
 	$q = urlencode(mysql_real_escape_string($q));
 	$q = urldecode($q);
-	$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q }%' ORDER BY `datetime` ASC";
+	$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";
 }else{
 	$error = "Please enter a query.";
 }

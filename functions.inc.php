@@ -38,10 +38,11 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 			$purchases[$j]['card'] = mysql_result($result, $j, 'card');
 			$purchases[$j]['currency'] = mysql_result($result, $j, 'currency');
 			$purchases[$j]['amount'] = mysql_result($result, $j, 'amount');
-			$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
 			if($search){
+				$purchases[$j]['purpose'] = highlight($searched, mysql_result($result, $j, 'purpose'));
 				$purchases[$j]['items'] = highlight($searched, mysql_result($result, $j, 'items'));
 			}else{
+				$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
 				$purchases[$j]['items'] = mysql_result($result, $j, 'items');
 			}
 			$purchases[$j]['actions'] = array('edit' => '/edit:'.$purchases[$j]['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id']);
