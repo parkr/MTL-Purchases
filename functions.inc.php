@@ -166,6 +166,7 @@ function jumpMenu(){
 	    <option value="/asc">ASC: Order By Date</option>
 		<option value="/fall-2010">Fall 2010</option>
 		<option value="/winter-2011">Winter 2011</option>
+		<option value="/logout">Logout</option>
 	  </select>
 	</form>';
 	return $output;

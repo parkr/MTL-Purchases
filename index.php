@@ -1,5 +1,5 @@
 <?php
-if(!isset($_COOKIE["loggedin"])){
+if(!(isset($_COOKIE["loggedin"]) && $_COOKIE["loggedin"] == "true")){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once('functions.inc.php');
