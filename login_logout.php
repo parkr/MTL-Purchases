@@ -33,7 +33,9 @@ if(isset($_GET['action'])){
 			if(isset($_POST['username']) && isset($_POST['password'])){
 				if($_POST['username'] == USERNAME && $_POST['password'] == USERPASS){
 					setcookie("loggedin", "true", time()+(60*60*12)); // 12 hours from now
-					header("http://mtl.parkr.me/login");
+					//header("http://mtl.parkr.me/");
+					echo "set cookie."
+					?><script>window.location="/";</script><?php
 				}else{
 					$error = "<h3>Username/Password was incorrect</h3>";
 				}
@@ -45,6 +47,7 @@ if(isset($_GET['action'])){
 			<meta name="author" content="Parker Moore">
 			<title>Log In: Montreal</title>
 			<link href="/login.css" rel="stylesheet" media="screen">
+			<script type="text/javascript" src="cookies.js"></script>
 			<!-- Date: 2010-12-27 -->
 		</head>
 		<body>
@@ -57,6 +60,9 @@ if(isset($_GET['action'])){
 					<input type="submit">
 				</form>
 			</div>
+			<script type="text/javascript">
+				if(get_cookie("loggedin")) window.location = '/';
+			</script>
 		</body>
 		</html>
 
