@@ -10,6 +10,7 @@ if(isset($_GET['action'])){
 				<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 				<meta name="author" content="Parker Moore">
 				<title>Log Out: Montreal</title>
+				<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 				<link href="/login.css" rel="stylesheet" media="screen">
 				<!-- Date: 2010-12-27 -->
 				<script type="text/javascript" src="cookies.js"></script>
@@ -46,6 +47,7 @@ if(isset($_GET['action'])){
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta name="author" content="Parker Moore">
 			<title>Log In: Montreal</title>
+			<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 			<link href="/login.css" rel="stylesheet" media="screen">
 			<script type="text/javascript" src="cookies.js"></script>
 			<!-- Date: 2010-12-27 -->

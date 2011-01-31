@@ -21,6 +21,7 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Add Purchase</title>
+	<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 	<link href="/default.css" rel="stylesheet" media="screen">
 	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 	<script src="/mtl.js" type="text/javascript"></script>
@@ -47,7 +48,8 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Edit Purchase</title>
-	<link href="default.css" rel="stylesheet" media="screen">
+	<link href="/fleur-de-lis.png" rel="icon" type="image/png">
+	<link href="/default.css" rel="stylesheet" media="screen">
 	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 	<script src="/mtl.js" type="text/javascript"></script>
 	</head>
