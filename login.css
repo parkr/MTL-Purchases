@@ -1,0 +1,16 @@
+html, body {
+	margin:0;
+	padding:0;
+	font-family: "Geneva", "Lucida Grande", Helvetica, sans-serif;
+	clear:both;
+}
+
+div#container {
+	width:1000px;
+	margin:0 auto;
+	padding:0;
+}
+
+input {
+	font-size: 18px;
+}

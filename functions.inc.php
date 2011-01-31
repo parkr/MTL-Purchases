@@ -175,14 +175,14 @@ function jumpMenu(){
 function addToDatabase($post){
 	include_once('db.inc.php');
 
-	$datetime = $post['datetime'];
-	$business_id = $post['business_id'];
-	$payment_type = $post['payment_type'];
-	$card = $post['card'];
-	$currency = $post['currency'];
-	$amount = $post['amount'];
-	$purpose = $post['purpose'];
-	$items = $post['items'];
+	$datetime = clean($post['datetime']);
+	$business_id = clean($post['business_id']);
+	$payment_type = clean($post['payment_type']);
+	$card = clean($post['card']);
+	$currency = clean($post['currency']);
+	$amount = clean($post['amount']);
+	$purpose = clean($post['purpose']);
+	$items = clean($post['items']);
 
 	if($card == "NULL"){
 		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', NULL, '$currency', '$amount', '$purpose', '$items')";
@@ -197,15 +197,15 @@ function addToDatabase($post){
 function updateInDatabase($post){
 	include_once('db.inc.php');
 
-	$id = $post['id'];
-	$datetime = $post['datetime'];
-	$business_id = $post['business_id'];
-	$payment_type = $post['payment_type'];
-	$card = $post['card'];
-	$currency = $post['currency'];
-	$amount = $post['amount'];
-	$purpose = $post['purpose'];
-	$items = $post['items'];
+	$id = clean($post['id']);
+	$datetime = clean($post['datetime']);
+	$business_id = clean($post['business_id']);
+	$payment_type = clean($post['payment_type']);
+	$card = clean($post['card']);
+	$currency = clean($post['currency']);
+	$amount = clean($post['amount']);
+	$purpose = clean($post['purpose']);
+	$items = clean($post['items']);
 
 	if($card == "NULL"){
 		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = NULL, `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
@@ -218,9 +218,9 @@ function updateInDatabase($post){
 
 function addBusiness($post){
 	include_once('db.inc.php');
-	$place_name = $post['place_name'];
-	$address = $post['address'];
-	$phone = $post['phone'];
+	$place_name = clean($post['place_name']);
+	$address = clean($post['address']);
+	$phone = clean($post['phone']);
 	if($phone == "+1"){
 		$phone = "";
 	}
@@ -240,10 +240,10 @@ function addBusiness($post){
 
 function updateBusiness($post){
 	include_once('db.inc.php');
-	$id = $post['id'];
-	$place_name = $post['place_name'];
-	$address = $post['address'];
-	$phone = $post['phone'];
+	$id = clean($post['id']);
+	$place_name = clean($post['place_name']);
+	$address = clean($post['address']);
+	$phone = clean($post['phone']);
 	if($phone == "+1"){
 		$phone = "";
 	}
@@ -265,6 +265,16 @@ function updateBusiness($post){
 function clean_search($search_query){
 	$search_query = urlencode($search_query);
 	return $search_query;
+}
+
+# clean up some user input (forms)
+function clean($dirty){
+	if (get_magic_quotes_gpc()) {
+		$clean = mysql_real_escape_string(stripslashes($dirty));	 
+	}else{
+		$clean = mysql_real_escape_string($dirty);	
+	} 
+	return $clean;
 }
 
 # reroute
