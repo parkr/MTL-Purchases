@@ -1,18 +1,20 @@
 <?php
 include('db.inc.php');
+include('auth.inc.php');
 if(isset($_GET['action'])){
 	if($_GET['action'] == "logout"){
-		setcookie("loggedin", "false", time()-3600);
+		logout();
 		?>
 			<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 			<html>
 			<head>
 				<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+				<meta http-equiv="Cache-Control" content="public, must-revalidate">
+				<!--<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">-->
 				<meta name="author" content="Parker Moore">
 				<title>Log Out: Montreal</title>
 				<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 				<link href="/login.css" rel="stylesheet" media="screen">
-				<!-- Date: 2010-12-27 -->
 				<script type="text/javascript" src="cookies.js"></script>
 			</head>
 			<body>
@@ -22,20 +24,17 @@ if(isset($_GET['action'])){
 					<p>Change your mind? <a href="/login">Log back in.</a></p>
 				</div>
 				<script type="text/javascript">
-					delete_cookie("loggedin", "/" , "mtl.parkr.me");
+					delete_cookie("PHPSESSID", "/" , "mtl.parkr.me");
 				</script>
 			</body>
 			</html>
 		<?php
 	}elseif($_GET['action'] == "login"){
-		if(isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"] == "true" || $_COOKIE["loggedin"] == true)){
+		if(session_open()){
 			header("Location: http://mtl.parkr.me");
 		}else{
 			if(isset($_POST['username']) && isset($_POST['password'])){
-				if($_POST['username'] == USERNAME && $_POST['password'] == USERPASS){
-					setcookie("loggedin", "true", time()+(60*60*12)); // 12 hours from now
-					//header("http://mtl.parkr.me/");
-					echo "set cookie."
+				if(login($_POST['username'], $_POST['password'])){
 					?><script>window.location="/";</script><?php
 				}else{
 					$error = "<h3>Username/Password was incorrect</h3>";
@@ -50,7 +49,6 @@ if(isset($_GET['action'])){
 			<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 			<link href="/login.css" rel="stylesheet" media="screen">
 			<script type="text/javascript" src="cookies.js"></script>
-			<!-- Date: 2010-12-27 -->
 		</head>
 		<body>
 			<div id="container">
@@ -63,7 +61,7 @@ if(isset($_GET['action'])){
 				</form>
 			</div>
 			<script type="text/javascript">
-				if(get_cookie("loggedin")) window.location = '/';
+				if(get_cookie("PHPSESSID")) window.location = '/';
 			</script>
 		</body>
 		</html>

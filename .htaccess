@@ -32,7 +32,19 @@ ExpiresByType image/gif A2592000
 ### Expire everything else 1 day from when it's last modified
 ### (this uses the Alternative syntax)
 ExpiresDefault "modification plus 1 day"
+
 ### Apply a Cache-Control header to all files
-<Files *>
-Header append Cache-Control "public, must-revalidate"
-</Files>
+# 480 weeks
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf)$">
+Header set Cache-Control "max-age=290304000, public"
+</FilesMatch>
+ 
+# 2 DAYS
+<FilesMatch "\.(xml|txt|js|css)$">
+Header set Cache-Control "max-age=172800, public, must-revalidate"
+</FilesMatch>
+ 
+# 2 HOURS
+<FilesMatch "\.(html|htm|php)$">
+Header set Cache-Control "max-age=7200, must-revalidate"
+</FilesMatch>

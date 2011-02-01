@@ -1,5 +1,6 @@
 <?php
-if(!isset($_COOKIE["loggedin"])){
+include_once("auth.inc.php");
+if(!session_open()){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once('functions.inc.php');
