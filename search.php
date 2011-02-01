@@ -7,9 +7,19 @@ include_once('db.inc.php');
 if($q){
 	$q = urlencode(mysql_real_escape_string($q));
 	$q = urldecode($q);
-	$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";
+	if($q == "_"){
+		$q = null;
+		$error = "You may not use special characters<br>in your queries. Please try again.";
+	}else{
+		$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";	
+	}
 }else{
-	$error = "Please enter a query.";
+	if($e=="special_chars"){
+		$error = "You may not use special characters<br>in your queries. Please try again.";
+	}else{
+		$error = "Please enter a query.";
+	}
+	$q = null;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,7 +46,7 @@ if($q){
 				show("Nothing was found.");
 			}
 		}else{
-			echo $error;
+			show($error);
 		}
 		?>
 		</table>

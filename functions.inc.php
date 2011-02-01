@@ -266,17 +266,60 @@ function updateBusiness($post){
 # clean up a search query
 function clean_search($search_query){
 	$search_query = urlencode($search_query);
+	$search_query = clean($search_query);
 	return $search_query;
 }
 
 # clean up some user input (forms)
 function clean($dirty){
+	include_once("db.inc.php");
 	if (get_magic_quotes_gpc()) {
 		$clean = mysql_real_escape_string(stripslashes($dirty));	 
 	}else{
 		$clean = mysql_real_escape_string($dirty);	
-	} 
-	return $clean;
+	}
+	return htmlspecialchars(addslashes($clean));
+}
+
+# check if single or double quotes exist in the string
+function containsQuotes($string){
+	if(preg_match("/(\"|\')/i", $string)>0){
+		return true;
+	}else{
+		if(strstr($string, "\"") || strstr($string, "'")){
+			return true;
+		}else{
+			$string = htmlspecialchars($string);
+			if(strstr($string, "%22") || strstr($string, "%27")){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+}
+
+function containsSpecialChars($string){
+	if(!strstr($string, "%") || !substr($string, "%")){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function search($query){
+	# TO BE SANITIZED
+	$search = clean_search($query);
+	$search = clean($search);
+	//echo $search;
+	if(containsSpecialChars($search)){
+		$s = false;
+		// CONTAINS SPECIAL CHARS
+		reroute("http://mtl.parkr.me/search?e=special_chars");
+	}else{
+		$s = false;
+		reroute("http://mtl.parkr.me/search/$search/");
+	}
 }
 
 # reroute

@@ -4,11 +4,7 @@ if(!(isset($_COOKIE["loggedin"]) && $_COOKIE["loggedin"] == "true")){
 }
 include_once('functions.inc.php');
 if($s){
-	//echo $s . " ";
-	$search = clean_search($s);
-	//echo $search;
-	reroute("http://mtl.parkr.me/search/$search/");
-	$s = false;
+	search($s);
 }elseif($q){
 	include_once('db.inc.php');
 	if($q == "asc"){
@@ -47,8 +43,8 @@ $_POST = null;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Purchases in Montréal</title>
-<link href="fleur-de-lis.png" rel="icon" type="image/png">
-<link href="default.css" rel="stylesheet" media="screen">
+<link href="/fleur-de-lis.png" rel="icon" type="image/png">
+<link href="/default.css" rel="stylesheet" media="screen">
 <script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/mtl.js" type="text/javascript"></script>
 </head>
