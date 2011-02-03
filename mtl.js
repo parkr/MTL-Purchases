@@ -17,6 +17,13 @@ function repositionJump(){
 	$("#jumping").css('left', $("#container").offset().left+30);
 	$("#jumping").css('top', 10);
 	$("#jumping").css('font-size', 30);
+	// I have to find a better place for this...
+	jQuery.fn.center = function () {
+				    this.css("position","absolute");
+				    this.css("top", ( $(window).height() - this.height() ) / 2+$(window).scrollTop() + "px");
+				    this.css("left", ( $(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
+				    return this;
+				}
 }
 
 function repositionReturn(){
@@ -42,6 +49,11 @@ function repositionSearch(page){
 			$("#search").css('font-size', 30);
 		}
 	}
+}
+
+function success(){
+	$(".success").center();
+	$(".success").fadeToggle(1000, "linear").delay(2000).fadeToggle(1000, "linear");
 }
 
 function goToSearch(){

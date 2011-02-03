@@ -119,3 +119,28 @@ table#purchases {
 	margin: 0 auto;
 	width:200px;
 }
+
+#delete {
+	background-color: rgb(200,0,2);
+	font-size:100px;
+	margin: 0 auto;
+	width: 400px;
+	font-family: "Geneva", "Helvetica Neue", sans-serif;
+	border-radius: 37px;
+	border-color: rgb(200,0,0);
+}
+
+#deleteform {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.success {
+	background-color: rgba(255,0,0,0.7);
+	padding: 20px;
+	height: 50px;
+	font-size: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	color:rgb(255,255,240);
+}

@@ -53,6 +53,7 @@ $_POST = null;
 <body>
 	<div id="container">
 		<h1 align="center">Purchases in Montréal</h1>
+		<?php if(isset($success)){printSuccess($success);} ?>
 		<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">
 		<?php 
 			processPurchases(mysql_query($query), true, "\t\t");
@@ -69,6 +70,7 @@ $_POST = null;
 	repositionJump();
 	repositionSearch("index");
 	repositionAddBLink();
+	success();
 </script>
 </body>
 </html>

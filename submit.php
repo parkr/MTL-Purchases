@@ -14,6 +14,8 @@ if(isset($_POST)){
 		addBusiness($_POST);
 	}elseif($_POST['action'] == "edit_business"){
 		updateBusiness($_POST);
+	}elseif($_POST['action'] == "delete"){
+		deletePurchase($_POST);
 	}else{
 		echo "There was a problem with your request.";
 	}

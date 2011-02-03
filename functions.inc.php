@@ -19,6 +19,29 @@ function getPurchase($purchase_id){
 	return $purchase;
 }
 
+function printPurchase($id = null){
+	if($id == null){
+		echo "You need to input an id number before you can retrieve any purchases.";
+	}else{
+		$baseTab = "\t";
+		$purchase = getPurchase($id);
+		$output = '<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">';
+		$output .= ("<tr class='actions'>\n".$baseTab."\t<th scope=\"col\" width='100'>datetime</th>\n".$baseTab."\t<th scope=\"col\">business</th>\n".$baseTab."\t<th scope=\"col\">payment type</th>\n".$baseTab."\t<th scope=\"col\">card</th>\n".$baseTab."\t<th scope=\"col\">currency</th>\n".$baseTab."\t<th scope=\"col\">amount</th>\n".$baseTab."\t<th scope=\"col\">purpose</th>\n".$baseTab."\t<th scope=\"col\">items</th>\n".$baseTab."</tr>\n");
+		$output .= ($baseTab . "<tr".($p%2!=0 ? " class='altrow'" : "").">\n");
+		$output .= ($baseTab . "\t<td>" . formatDate($purchase['datetime'])."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['business']['place_name']."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['payment_type']."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['card']."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['currency']."</td>\n");
+		$output .= ($baseTab . "\t<td>$". $purchase['amount']."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['purpose']."</td>\n");
+		$output .= ($baseTab . "\t<td>" . $purchase['items']."</td>\n");
+		$output .= ($baseTab . "</tr>\n");
+		$output .= "</table>";
+		echo $output;
+	}
+}
+
 
 # $result is a mysql result
 # returns array ($purchases[$i]['field_name']) with all purchases from that result
@@ -192,7 +215,7 @@ function addToDatabase($post){
 		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', '$card', '$currency', '$amount', '$purpose', '$items')";
 	}
 	mysql_query($query) or die(mysql_error());
-	header("Location: http://mtl.parkr.me");
+	header("Location: http://mtl.parkr.me/?success=add");
 }
 
 # code to edit / update this particular transaction in the database
@@ -215,7 +238,7 @@ function updateInDatabase($post){
 		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = '$card', `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
 	}
 	mysql_query($query) or die(mysql_error());
-	header("Location: http://mtl.parkr.me");
+	header("Location: http://mtl.parkr.me/?success=upd");
 }
 
 function addBusiness($post){
@@ -237,7 +260,7 @@ function addBusiness($post){
 	}else{
 		mysql_query("INSERT INTO `montreal_businesses` (`place_name`, `address`, `phone`) VALUES ('$place_name', '$address', '$phone')") or die(mysql_error());
 	}
-	header("Location: http://mtl.parkr.me");
+	header("Location: http://mtl.parkr.me/?success=addb");
 }
 
 function updateBusiness($post){
@@ -260,7 +283,13 @@ function updateBusiness($post){
 	}else{
 		mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = '$address', `phone` = '$phone' WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
 	}
-	header("Location: http://mtl.parkr.me");
+	header("Location: http://mtl.parkr.me/?success=updb");
+}
+
+function deletePurchase($post){
+	$id = $_POST['id'];
+	mysql_query("DELETE FROM `".PURCHASES_TABLE."` WHERE `id` = $id") or die(mysql_error());
+	header("Location: http://mtl.parkr.me/?success=del");
 }
 
 # clean up a search query
@@ -336,5 +365,20 @@ function show($what){
 function highlight($what, $where){
 	# search in where for what
 	return str_ireplace($what, "<span class='highlighted'>$what</span>", $where);
+}
+
+function printSuccess($successKey){
+	if($successKey == "upd"){
+		$phrase = "You have successfully updated the purchase.";
+	}elseif($successKey == "add"){
+		$phrase = "You have successfully added the purchase.";
+	}elseif($successKey == "del"){
+		$phrase = "You have successfully deleted the purchase.";
+	}elseif($successKey == "addb"){
+		$phrase = "You have successfully added the business.";
+	}elseif($successKey == "updb"){
+		$phrase = "You have successfully updated the business.";
+	}
+	echo '<span class="success" style="display:none;">'.$phrase.'</span>';
 }
 ?>
