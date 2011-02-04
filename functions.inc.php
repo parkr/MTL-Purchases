@@ -14,7 +14,7 @@ function getPurchase($purchase_id){
 		$purchase['amount'] = mysql_result($result, 0, 'amount');
 		$purchase['purpose'] = mysql_result($result, 0, 'purpose');
 		$purchase['items'] = mysql_result($result, 0, 'items');
-		$purchase['actions'] = array('edit' => '/edit:'.$purchase['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id']);
+		$purchase['actions'] = array('edit' => '/edit:'.$purchase['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id'], 'delete' => '/delete:'.$purchase['id']);
 	}
 	return $purchase;
 }
@@ -68,19 +68,19 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 				$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
 				$purchases[$j]['items'] = mysql_result($result, $j, 'items');
 			}
-			$purchases[$j]['actions'] = array('edit' => '/edit:'.$purchases[$j]['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id']);
+			$purchases[$j]['actions'] = array('edit' => '/edit:'.$purchases[$j]['id'], 'delete' => '', 'after' => '/after:'.$purchases[$j]['id'], 'before' => '/before:'.$purchases[$j]['id'], 'delete' => '/delete:'.$purchases[$j]['id']);
 		}
 		if($stringTableFormat){
 			$output = "";
 			$output .= ("<tr class='actions'>\n".$baseTab."\t<th scope=\"col\" width='100'>datetime</th>\n".$baseTab."\t<th scope=\"col\">business</th>\n".$baseTab."\t<th scope=\"col\">payment type</th>\n".$baseTab."\t<th scope=\"col\">card</th>\n".$baseTab."\t<th scope=\"col\">currency</th>\n".$baseTab."\t<th scope=\"col\">amount</th>\n".$baseTab."\t<th scope=\"col\">purpose</th>\n".$baseTab."\t<th scope=\"col\">items</th>\n".$baseTab."\t<th scope=\"col\">actions</th>\n".$baseTab."</tr>\n");
 			for($p=0; $p<count($purchases); $p++){
 				$output .= ($baseTab . "<tr".($p%2!=0 ? " class='altrow'" : "").">\n");
-				$output .= ($baseTab . "\t<td>" . formatDate($purchases[$p]['datetime'])."</td>\n");
+				$output .= ($baseTab . "\t<td><a href='".$purchases[$p]['actions']['edit']."' title='Edit'>" . formatDate($purchases[$p]['datetime'])."</a></td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['business']['place_name']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['payment_type']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['card']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['currency']."</td>\n");
-				$output .= ($baseTab . "\t<td>$" . $purchases[$p]['amount']."</td>\n");
+				$output .= ($baseTab . "\t<td>$". $purchases[$p]['amount']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['purpose']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['items']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . formatActions($purchases[$p]['actions'])."</td>\n");
@@ -113,10 +113,10 @@ function getCurrDate(){
 # returns string output of links for actions
 function formatActions($actions){
 	$actionOutput = "";
-	$actionOutput .= '<a href="'.$actions['before'].'" alt="view transactions before this one" title="view transactions before this one">before</a> ';
-	$actionOutput .= '<a href="'.$actions['edit'].'" alt="edit this transaction" title="edit this transaction">edit</a> ';
-	$actionOutput .= '<a href="'.$actions['after'].'" alt="view transactions after this one" title="view transactions after this one">after</a>';
-	//$actionOutput .= ' <a href="'.$actions['delete'].'">delete</a>';
+	$actionOutput .= '<a href="'.$actions['before'].'" alt="view transactions before this one" title="view transactions before this one">&laquo;</a> ';
+	//$actionOutput .= '<a href="'.$actions['edit'].'" alt="edit this transaction" title="edit this transaction">edit</a> ';
+	$actionOutput .= '<a href="'.$actions['delete'].'">&times;</a> ';
+	$actionOutput .= '<a href="'.$actions['after'].'" alt="view transactions after this one" title="view transactions after this one">&raquo;</a>';
 	return $actionOutput;
 }
 
