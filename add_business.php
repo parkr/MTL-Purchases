@@ -1,5 +1,5 @@
 <?php
-if(!isset($_COOKIE["loggedin"])){
+if(!isset($_COOKIE["PHPSESSID"])){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once("db.inc.php");
@@ -20,7 +20,7 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Add Purchase</title>
+	<title>Add Business</title>
 	<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 	<link href="/default.css" rel="stylesheet" media="screen">
 	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
@@ -47,7 +47,7 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Edit Purchase</title>
+	<title>Edit Business</title>
 	<link href="/fleur-de-lis.png" rel="icon" type="image/png">
 	<link href="/default.css" rel="stylesheet" media="screen">
 	<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 

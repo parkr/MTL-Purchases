@@ -215,6 +215,7 @@ function addToDatabase($post){
 		$query = "INSERT INTO `".PURCHASES_TABLE."` (`id`, `datetime`, `business_id`, `payment_type`, `card`, `currency`, `amount`, `purpose`, `items`) VALUES (NULL, '$datetime', '$business_id', '$payment_type', '$card', '$currency', '$amount', '$purpose', '$items')";
 	}
 	mysql_query($query) or die(mysql_error());
+	$_SESSION['success'] = "add";
 	header("Location: http://mtl.parkr.me/?success=add");
 }
 
@@ -238,6 +239,7 @@ function updateInDatabase($post){
 		$query = "UPDATE `".PURCHASES_TABLE."` SET `datetime` = '$datetime', `business_id` = '$business_id', `payment_type` = '$payment_type', `card` = '$card', `currency` = '$currency', `amount` = '$amount', `purpose` = '$purpose', `items` = '$items' WHERE `montreal_purchases`.`id` = $id";
 	}
 	mysql_query($query) or die(mysql_error());
+	$_SESSION['success'] = "upd";
 	header("Location: http://mtl.parkr.me/?success=upd");
 }
 
@@ -260,6 +262,7 @@ function addBusiness($post){
 	}else{
 		mysql_query("INSERT INTO `montreal_businesses` (`place_name`, `address`, `phone`) VALUES ('$place_name', '$address', '$phone')") or die(mysql_error());
 	}
+	$_SESSION['success'] = "addb";
 	header("Location: http://mtl.parkr.me/?success=addb");
 }
 
@@ -283,12 +286,14 @@ function updateBusiness($post){
 	}else{
 		mysql_query("UPDATE `".BUSINESSES_TABLE."` SET `place_name` = '$place_name', `address` = '$address', `phone` = '$phone' WHERE `".BUSINESSES_TABLE."`.`id` = $id") or die(mysql_error());
 	}
+	$_SESSION['success'] = "updb";
 	header("Location: http://mtl.parkr.me/?success=updb");
 }
 
 function deletePurchase($post){
 	$id = $_POST['id'];
 	mysql_query("DELETE FROM `".PURCHASES_TABLE."` WHERE `id` = $id") or die(mysql_error());
+	$_SESSION['success'] = "del";
 	header("Location: http://mtl.parkr.me/?success=del");
 }
 
