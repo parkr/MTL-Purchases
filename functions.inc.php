@@ -52,6 +52,7 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 	3. Iterate through each row, separating the data into the sub-array
 	4. Output the array */
 	if(is_resource($result)){
+		$total = 0.0;
 		$purchases = array();
 		for($j=0; $j<mysql_num_rows($result); $j++){
 			$purchases[$j]['id'] = mysql_result($result, $j, 'id');
@@ -64,6 +65,7 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 			if($search){
 				$purchases[$j]['purpose'] = highlight($searched, mysql_result($result, $j, 'purpose'));
 				$purchases[$j]['items'] = highlight($searched, mysql_result($result, $j, 'items'));
+				$total += $purchases[$j]['amount'];
 			}else{
 				$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
 				$purchases[$j]['items'] = mysql_result($result, $j, 'items');
@@ -84,6 +86,14 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['purpose']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . $purchases[$p]['items']."</td>\n");
 				$output .= ($baseTab . "\t<td>" . formatActions($purchases[$p]['actions'])."</td>\n");
+				$output .= ($baseTab . "</tr>\n");
+			}
+			if($search){
+				$output .= ($baseTab . "<tr".($p%2!=0 ? " class='altrow'" : "").">\n");
+				$output .= ($baseTab . "<td></td>\n<td></td>\n<td></td>\n<td></td>\n");
+				$output .= ($baseTab . "\t<td>Total:</td>\n");
+				$output .= ($baseTab . "\t<td>$$total</td>\n");
+				$output .= ($baseTab . "<td></td>\n<td></td>\n<td></td>\n");
 				$output .= ($baseTab . "</tr>\n");
 			}
 			echo $output;
