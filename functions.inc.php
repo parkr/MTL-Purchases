@@ -140,6 +140,7 @@ function getSelectedCard($card){
 	$selected['NULL'] = ($card == null ? " selected=\"selected\"" : "");
 	$selected['RBC/Interac'] = ($card == "RBC/Interac" ? " selected=\"selected\"" : "");
 	$selected['Citizens Bank'] = ($card == "Citizens Bank" ? " selected=\"selected\"" : "");
+	$selected['Gift Card'] = ($card == "Gift Card" ? " selected=\"selected\"" : "");
 	return $selected;
 }
 

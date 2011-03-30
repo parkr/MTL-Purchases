@@ -63,6 +63,7 @@ foreach ($_GET as $key => $value){
       <option value="NULL">NONE</option>
       <option value="RBC/Interac">Interac</option>
       <option value="Citizens Bank">Citizen's Bank</option>
+	  <option value="Gift Card">Gift Card</option>
       </select></td>
   </tr>
   <tr>
@@ -157,6 +158,7 @@ if(isset($_GET['edit'])): ?>
       <option value="NULL"<?php echo $isSelectedCard['NULL']; ?>>NONE</option>
       <option value="RBC/Interac"<?php echo $isSelectedCard['RBC/Interac']; ?>>Interac</option>
       <option value="Citizens Bank"<?php echo $isSelectedCard['Citizens Bank']; ?>>Citizen's Bank</option>
+	  <option value="Gift Card"<?php echo $isSelectedCard['Gift Card']; ?>>Gift Card</option>
       </select></td>
   </tr>
   <tr>
