@@ -77,7 +77,7 @@ table#purchases {
 #searchwrapper {
 	width:319px; /*follow your image's size*/
 	height:48px;/*follow your image's size*/
-	background-image:url("searchbox.jpg");
+	background-image:url("img/searchbox.jpg");
 	background-repeat:no-repeat; /*important*/
 	padding:0px;
 	margin:0px;

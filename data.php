@@ -65,6 +65,7 @@ function getAmountPerDay(){
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="author" content="Parker Moore">
 	<title>Purchases in Montréal</title>
+	<link href="/img/fleur-de-lis.png" rel="icon" type="image/png">
 	<link href="/default.css" rel="stylesheet" media="screen" />
 	<style type="text/css">
 		body {

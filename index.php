@@ -44,7 +44,7 @@ $_POST = null;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Purchases in Montréal</title>
-<link href="/fleur-de-lis.png" rel="icon" type="image/png">
+<link href="/img/fleur-de-lis.png" rel="icon" type="image/png">
 <link href="/default.css" rel="stylesheet" media="screen">
 <script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/mtl.js" type="text/javascript"></script>
