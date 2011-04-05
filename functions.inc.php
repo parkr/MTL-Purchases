@@ -45,7 +45,7 @@ function printPurchase($id = null){
 
 # $result is a mysql result
 # returns array ($purchases[$i]['field_name']) with all purchases from that result
-function processPurchases($result, $stringTableFormat = false, $baseTab = "", $search = false, $searched = ""){
+function processPurchases($result, $stringTableFormat = false, $baseTab = "", $search = false, $searched= array()){
 	/*
 	1. Check if $result is valid mysql result
 	2. Create array
@@ -63,8 +63,8 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 			$purchases[$j]['currency'] = mysql_result($result, $j, 'currency');
 			$purchases[$j]['amount'] = mysql_result($result, $j, 'amount');
 			if($search){
-				$purchases[$j]['purpose'] = highlight($searched, mysql_result($result, $j, 'purpose'));
-				$purchases[$j]['items'] = highlight($searched, mysql_result($result, $j, 'items'));
+				$purchases[$j]['purpose'] = highlight($searched["purpose"], mysql_result($result, $j, 'purpose'));
+				$purchases[$j]['items'] = highlight($searched["item"], mysql_result($result, $j, 'items'));
 				$total += $purchases[$j]['amount'];
 			}else{
 				$purchases[$j]['purpose'] = mysql_result($result, $j, 'purpose');
@@ -344,23 +344,36 @@ function containsQuotes($string){
 	}
 }
 
-function containsSpecialChars($string){
-	if(!strstr($string, "%") || !substr($string, "%")){
-		return false;
-	}else{
-		return true;
+function within($string, $search){
+	return !(!strstr($string, $search) || !substr($string, $search));
+}
+
+function containsSpecialChars($string, $as_text=false){
+	$not_accepted = array("%24", "%26", "%2C", "%2F", "%3B", "%3D", "%3F", "%40", "%22", "%3C", "%3E", "%23", "%25", "%7B", "%7D", "%7C", "%5C", "%5E", "%7E", "%5B", "%5D", "%60");
+	// "%2B"
+	// List obtained from: http://www.blooberry.com/indexdot/html/topics/urlencoding.htm
+	foreach ($not_accepted as $hex){
+		if(strpos($string, $hex) === true){
+			if($as_text){
+				return "Unacceptable: ".$hex." (".urldecode($hex).") at position [".strpos($string, urldecode($hex))."] in string '".$string."'";
+			}else{
+				return true;
+			}
+		}
 	}
+	return false;
 }
 
 function search($query){
 	# TO BE SANITIZED
+	$query = str_replace(" ", "--", $query);
 	$search = clean_search($query);
 	$search = clean($search);
 	//echo $search;
-	if(containsSpecialChars($search)){
+	if(containsSpecialChars($search) != false){
 		$s = false;
 		// CONTAINS SPECIAL CHARS
-		reroute("http://mtl.parkr.me/search?e=special_chars");
+		reroute("http://mtl.parkr.me/search?e=special_chars&q=".$search);
 	}else{
 		$s = false;
 		reroute("http://mtl.parkr.me/search/$search/");

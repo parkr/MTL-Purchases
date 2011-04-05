@@ -4,19 +4,64 @@ if(!session_open()){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once('functions.inc.php');
+echo containsSpecialChars(urlencode("for:you"), true);
 include_once('db.inc.php');
-if($q){
+if($q && !$e){
+	$e = null;
 	$q = urlencode(mysql_real_escape_string($q));
 	$q = urldecode($q);
-	if($q == "_"){
+	if(!$q){
 		$q = null;
-		$error = "You may not use special characters<br>in your queries. Please try again.";
+		$error = "You may not use special characters<br>in your queries. Please try again. (in q)";
 	}else{
-		$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";	
+		// Check for special fields!
+		$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE ";
+		$stuff = explode("--", $q);
+		$things = array();
+		foreach ($stuff as $thing){
+			$key = substr($thing, 0, strpos($thing, ":"));
+			$value = substr($thing, strpos($thing, ":")+1);
+			$things[$key] = $value;
+		}
+		if(stristr($q, 'from') !== FALSE){
+			$error = "This currently doesn't work."; 
+		}
+		if(stristr($q, 'after') !== FALSE){
+			$datetime = $things["after"];
+			$query.= ($inserted) ? "AND " : "";
+			$query .= "`datetime` >= '$datetime' ";
+			$inserted = true;
+		}
+		if(stristr($q, 'before') !== FALSE){
+			$datetime = $things["before"];
+			$query.= ($inserted) ? "AND " : "";
+			$query .= "`datetime` <= '$datetime' ";
+			$inserted = true;
+		}
+		if(stristr($q, 'paytype') !== FALSE){
+			$paytype = $things["paytype"];
+			$query.= ($inserted) ? "AND " : "";
+			$query .= "`payment_type` LIKE '$paytype' ";
+			$inserted = true;
+		}
+		if(stristr($q, 'purpose') !== FALSE){
+			$purpose = $things["purpose"];
+			$query.= ($inserted) ? "AND " : "";
+			$query .= "`purpose` LIKE '%{$purpose}%' ";
+			$inserted = true;
+		}
+		if(stristr($q, 'item') !== FALSE){
+			$item = $things["item"];
+			$query.= ($inserted) ? "AND " : "";
+			$query .= "`items` LIKE '%{$item}%' ";
+			$inserted = true;
+		}
+		$query = trim($query).";";
+		//$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";	
 	}
 }else{
 	if($e=="special_chars"){
-		$error = "You may not use special characters<br>in your queries. Please try again.";
+		$error = "You may not use special characters<br>in your queries. Please try again.<br>(Your query: '$q')";
 	}else{
 		$error = "Please enter a query.";
 	}
@@ -30,7 +75,8 @@ if($q){
 <title>Search: Purchases in Montréal</title>
 <link href="/img/fleur-de-lis.png" rel="icon" type="image/png">
 <link href="/default.css" rel="stylesheet" media="screen">
-<script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
+<link href="/search.css" rel="stylesheet" media="screen">
+<script src="http://code.jquery.com/jquery-1.5.2.min.js" type="text/javascript"></script> 
 <script src="/mtl.js" type="text/javascript"></script>
 </head>
 
@@ -39,10 +85,10 @@ if($q){
 		<h1 align="center">Search: Purchases in Montréal</h1>
 		<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">
 		<?php 
-		if($q){
+		if($q && !$e){
 			$result = mysql_query($query);
 			if(mysql_num_rows($result) > 0){
-				processPurchases($result, true, "\t\t", true, "$q");
+				processPurchases($result, true, "\t\t", true, $things);
 			}else{
 				show("Nothing was found.");
 			}
@@ -52,16 +98,32 @@ if($q){
 		?>
 		</table>
 		<div id="jumping"><?php echo jumpMenu(); ?></div>
+		<div id="instructions_container">
+			<span id="instructions_hover">Instructions</span>
+			<div id="instructions">
+				You may use one of the following to<br>specify something of that type:
+				<ul>
+					<li><code>item</code></li>
+					<li><code>purpose</code></li>
+					<li><code>from</code></li>
+					<li><code>after</code></li>
+					<li><code>before</code></li>
+					<li><code>paytype</code></li>
+				</ul>
+				<span id="further">Follow it with a ':' and the value<br>that you're looking for.</span>
+			</div>
+		</div>
 	</div>
 	<div id="add" class="hide"></div>
 	<div id="searchwrapper"><form method="get" action="/index.php">
-	<input type="text" class="searchbox" name="s" value="<?php echo $q ?>" />
+	<input type="text" class="searchbox" name="s" value="<?php echo str_replace("--", " ", $q); ?>" />
 	<input type="image" src="/img/magnifying_glass.png" class="searchbox_submit" value="" />
 	</form></div>
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();
 	repositionSearch("search");
+	right_instructions();
 </script>
 </body>
 </html>

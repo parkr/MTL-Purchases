@@ -73,46 +73,6 @@ table#purchases {
 	width:600px;
 }
 
-/******************** SEARCH BABY SEARCH *********************/
-#searchwrapper {
-	width:319px; /*follow your image's size*/
-	height:48px;/*follow your image's size*/
-	background-image:url("img/searchbox.jpg");
-	background-repeat:no-repeat; /*important*/
-	padding:0px;
-	margin:0px;
-	position:relative; /*important*/
-}
- 
-#searchwrapper form { display:inline ; }
- 
-.searchbox {
-	border:0px; /*important*/
-	background-color:transparent; /*important*/
-	position:absolute; /*important*/
-	top:4px;
-	left:9px;
-	width:256px;
-	height:28px;
-	color: #fff;
-	font-size: 18px;
-}
- 
-.searchbox_submit {
-	border:0px; /*important*/
-	background-color:transparent; /*important*/
-	position:absolute; /*important*/
-	top:4px;
-	left:265px;
-	width:32px;
-	height:28px;
-}
-
-.highlighted {
-	background-color: rgb(255, 250, 130);
-}
-
-
 /************************* MISC ***************************/
 .centered {
 	text-align: center;

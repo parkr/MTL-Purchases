@@ -51,6 +51,45 @@ function repositionSearch(page){
 	}
 }
 
+function inline_instructions(){
+	var hover = $("#instructions_hover");
+	var position = hover.position();
+	var offset_h = ((0.5*$("#instructions").height())-(0.5*$("#instructions_hover").height()));
+	var offset_w = ((0.5*$("#instructions").width())-(0.5*$("#instructions_hover").width()));
+	$("#instructions").css('top', (position.top-offset_h)+"px");
+	$("#instructions").css('left', (position.left-offset_w)+"px");
+	$("#instructions_hover").mouseover(function(){
+		$("#instructions_hover").animate({opacity:0});
+		$("#instructions").animate({opacity:0.9});
+	});
+	$("#instructions_hover").mouseout(function(){
+		$("#instructions_hover").animate({opacity:1});
+		$("#instructions").animate({opacity:0});
+	});
+}
+
+function right_instructions(){
+	var offset = 10;
+	$("#instructions").css('right', offset+"px");
+	$("#instructions").css('top', offset+"px");
+	var top = ((0.5*$("#instructions").height())-(0.5*$("#instructions_hover").height()));
+	var right = ((0.5*$("#instructions").width())-(0.5*$("#instructions_hover").width()));
+	$("#instructions_hover").css('position', 'absolute');
+	$("#instructions_hover").css('top', (top+offset)+"px");
+	var topp = $("#instructions_hover").css('top');
+	$("#instructions_hover").css('right', (right+offset)+"px");
+	var rightt = $("#instructions_hover").css('right');
+	//alert(topp +" "+ rightt);
+	$("#instructions_hover").mouseover(function(){
+		$("#instructions_hover").animate({opacity:0});
+		$("#instructions").animate({opacity:0.9});
+	});
+	$("#instructions_hover").mouseout(function(){
+		$("#instructions_hover").animate({opacity:1});
+		$("#instructions").animate({opacity:0});
+	});
+}
+
 function success(){
 	$(".success").center();
 	$(".success").fadeToggle(1000, "linear").delay(2000).fadeToggle(1000, "linear");
