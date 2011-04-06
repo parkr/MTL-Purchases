@@ -128,6 +128,7 @@ if($q && !$e){
 	<input type="text" class="searchbox" name="s" value="<?php echo str_replace("--", " ", $q); ?>" />
 	<input type="image" src="/img/magnifying_glass.png" class="searchbox_submit" value="" />
 	</form></div>
+	<div id="back_button"><a href="/search">&larr;Back</a></div>
 <script type="text/javascript"> 
 	repositionAdd();
 	repositionJump();

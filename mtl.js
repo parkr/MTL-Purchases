@@ -51,6 +51,12 @@ function repositionSearch(page){
 	}
 }
 
+function back_to_search(){
+	//$("#back_button").css('left', $("#container").offset().left+20);
+	$("#back_button").css('left', $("#jumping").position().left+3);
+	$("#back_button").css('top', $("#searchwrapper").offset().top+6);
+}
+
 function inline_instructions(){
 	var hover = $("#instructions_hover");
 	var position = hover.position();
