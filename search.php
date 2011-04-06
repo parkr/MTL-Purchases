@@ -5,6 +5,7 @@ if(!session_open()){
 }
 include_once('functions.inc.php');
 include_once('db.inc.php');
+$has_searched = false;
 if($q && !$e){
 	$e = null;
 	$q = urlencode(mysql_real_escape_string($q));
@@ -103,8 +104,10 @@ if($q && !$e){
 			$result = mysql_query($query);
 			if(mysql_num_rows($result) > 0){
 				processPurchases($result, true, "\t\t", true, $things);
+				$has_searched = true;
 			}else{
 				show("Nothing was found.");
+				$has_searched = true;
 			}
 		}else{
 			show($error);
@@ -113,7 +116,7 @@ if($q && !$e){
 		</table>
 		<div id="jumping"><?php echo jumpMenu(); ?></div>
 		<div id="instructions_container">
-			<span id="instructions_hover">Instructions</span>
+			<span id="instructions_hover">Hover for<br>Instructions</span>
 			<div id="instructions">
 				You may use one of the following to<br>specify something of that type:
 				<ul>
@@ -124,7 +127,10 @@ if($q && !$e){
 					<li><code>before</code></li>
 					<li><code>paytype</code></li>
 				</ul>
-				<span id="further">Follow it with a ':' and the value<br>that you're looking for.</span>
+				<span id="further">
+					Follow it with a ':' and the value<br>that you're looking for.<br>
+					If you are only looking for an item<br>or purpose, feel free to enter just<br>that, excluding the specifier.
+				</span>
 			</div>
 		</div>
 	</div>
@@ -138,7 +144,7 @@ if($q && !$e){
 	repositionAdd();
 	repositionJump();
 	repositionSearch("search");
-	<?php if($query){echo "\tback_to_search();";} ?>
+	<?php if($has_searched){echo "\tback_to_search();";} ?>
 	right_instructions();
 </script>
 </body>

@@ -41,8 +41,10 @@
 }
 
 	#instructions_container #instructions_hover {
-		position:relative;
-		z-index:2
+		position: relative;
+		z-index: 2;
+		border: #ccc solid 2px;
+		padding: 5px;
 	}
 
 	#instructions_container #instructions {
@@ -51,6 +53,8 @@
 		background-color:#fff;
 		opacity:0;
 		position:absolute;
+		padding:7px;
+		border: #ccc solid 5px;
 	}
 
 	#instructions_container ul {
@@ -67,4 +71,5 @@
 #back_button {
 	position: absolute;
 	font-size: 20px;
+	display: none;
 }

@@ -55,6 +55,7 @@ function back_to_search(){
 	//$("#back_button").css('left', $("#container").offset().left+20);
 	$("#back_button").css('left', $("#jumping").position().left+3);
 	$("#back_button").css('top', $("#searchwrapper").offset().top+6);
+	$("#back_button").css('display', 'block');
 }
 
 function inline_instructions(){
@@ -81,14 +82,16 @@ function right_instructions(){
 	var top = ((0.5*$("#instructions").height())-(0.5*$("#instructions_hover").height()));
 	var right = ((0.5*$("#instructions").width())-(0.5*$("#instructions_hover").width()));
 	$("#instructions_hover").css('position', 'absolute');
-	$("#instructions_hover").css('top', (top+offset)+"px");
-	var topp = $("#instructions_hover").css('top');
-	$("#instructions_hover").css('right', (right+offset)+"px");
-	var rightt = $("#instructions_hover").css('right');
-	//alert(topp +" "+ rightt);
+	// Uncomment if you'd like to center the hover-over text in relation to the instructions box
+	//		$("#instructions_hover").css('top', (top+offset)+"px");
+	//		$("#instructions_hover").css('right', (right+offset)+"px");
+	// Uncomment if you'd like to push the hover-over text to be the same distance from 
+	// the right and top as the instructions
+			$("#instructions_hover").css('top', (offset)+"px");
+			$("#instructions_hover").css('right', (offset)+"px");
 	$("#instructions_hover").mouseover(function(){
 		$("#instructions_hover").animate({opacity:0});
-		$("#instructions").animate({opacity:0.9});
+		$("#instructions").animate({opacity:1});
 	});
 	$("#instructions_hover").mouseout(function(){
 		$("#instructions_hover").animate({opacity:1});
