@@ -63,7 +63,12 @@ if($q && !$e){
 			$inserted = true;
 		}
 		$query = trim($query).";";
-		//$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$q}%' OR `purpose` LIKE '%{$q}%' ORDER BY `datetime` ASC";	
+		if(count($stuff) == 1 && stristr($stuff[0], ':') === FALSE){
+			$thing = $stuff[0];
+			$query = "SELECT * FROM `".PURCHASES_TABLE."` WHERE `items` LIKE '%{$thing}%' OR `purpose` LIKE '%{$thing}%' ORDER BY `datetime` ASC";
+			$things["item"] = $thing;
+			$things["purpose"] = $thing;
+		}
 	}
 }else{
 	if($e=="special_chars"){
