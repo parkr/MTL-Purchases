@@ -165,6 +165,18 @@ function getBusiness($business_id){
 	return $business;
 }
 
+# returns business id
+function getBusinessID($search_query){
+	include_once("db.inc.php");
+	str_replace("_", " ", $search_query);
+	$resultB = mysql_query("SELECT * FROM `".DATABASE_NAME."`.`".BUSINESSES_TABLE."` WHERE `place_name` LIKE '%".$search_query."%'");
+	if(!mysql_errno())
+		$id = mysql_result($resultB, 0, "id");
+	else
+		$id = -1;
+	return $id;
+}
+
 # returns array ($businesses[$i]['field_name']) with all businesses in montreal_businesses
 function getBusinesses(){
 	include_once('db.inc.php');

@@ -4,7 +4,6 @@ if(!session_open()){
 	header("Location: http://mtl.parkr.me/login");
 }
 include_once('functions.inc.php');
-echo containsSpecialChars(urlencode("for:you"), true);
 include_once('db.inc.php');
 if($q && !$e){
 	$e = null;
@@ -24,7 +23,14 @@ if($q && !$e){
 			$things[$key] = $value;
 		}
 		if(stristr($q, 'from') !== FALSE){
-			$error = "This currently doesn't work."; 
+			$id = getBusinessID($things["from"]);
+			if($id > 0){
+				$query.= ($inserted) ? "AND " : "";
+				$query .= "`business_id` = $id ";
+				$inserted = true;
+			}else{
+				$error = "Could not find the business.";
+			}
 		}
 		if(stristr($q, 'after') !== FALSE){
 			$datetime = $things["after"];
@@ -86,6 +92,9 @@ if($q && !$e){
 		<table width="1000" border="0" cellspacing="0" cellpadding="0" id="purchases">
 		<?php 
 		if($q && !$e){
+			if($error && $error != ""){
+				show($error);
+			}
 			$result = mysql_query($query);
 			if(mysql_num_rows($result) > 0){
 				processPurchases($result, true, "\t\t", true, $things);
@@ -123,6 +132,7 @@ if($q && !$e){
 	repositionAdd();
 	repositionJump();
 	repositionSearch("search");
+	<?php if($query){echo "\tback_to_search();";} ?>
 	right_instructions();
 </script>
 </body>
