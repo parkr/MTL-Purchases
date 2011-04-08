@@ -36,6 +36,7 @@ table#purchases {
 }
 
 #purchases td {
+	font-family: "LubalinGraphStd", "Geneva", "Lucida Grande", Helvetica, sans-serif;
 	margin: 10px;
 	overflow-y:auto;
 	max-height:100px;

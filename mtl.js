@@ -173,17 +173,10 @@ function urlencode (str) {
 
 function cufonn(){
 	var d=document, z=d.createElement('scr'+'ipt'), y=d.createElement('scr'+'ipt'), b=d.body, l=d.location;
-	if(!b)
-		throw(0);
 	z.setAttribute('src', '/cufon.js');
 	z.setAttribute('type', 'text/javascript');
 	y.setAttribute('src', '/Lubalin.font.js')
 	y.setAttribute('type', 'text/javascript');
 	b.appendChild(z);
 	b.appendChild(y);
-	replaceWithNewFont();
-}
-
-function replaceWithNewFont(){
-	Cufon.replace('#container');
 }
