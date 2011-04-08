@@ -37,6 +37,7 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	</div>
 	<div id="return"><a href="/">Return</a></div>
 	<script type="text/javascript">
+	cufonn();
 		repositionReturn();
 	</script>
 	</body>
@@ -66,6 +67,7 @@ if(isset($_POST['place_name']) && $_POST['place_name'] != ""){
 	</div>
 	<div id="return"><a href="/">Return</a></div>
 	<script type="text/javascript">
+	cufonn();
 		repositionReturn();
 	</script>
 	</body>

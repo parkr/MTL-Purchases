@@ -141,6 +141,7 @@ if($q && !$e){
 	</form></div>
 	<div id="back_button"><a href="/search">&larr;Back</a></div>
 <script type="text/javascript"> 
+	cufonn();
 	repositionAdd();
 	repositionJump();
 	repositionSearch("search");

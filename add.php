@@ -97,6 +97,7 @@ foreach ($_GET as $key => $value){
 </div>
 <div id="return"><a href="/">Return</a></div>
 <script type="text/javascript">
+	cufonn();
 	repositionReturn();
 </script>
 </body>
@@ -192,6 +193,7 @@ if(isset($_GET['edit'])): ?>
 </div>
 <div id="return"><a href="/">Return</a></div>
 <script type="text/javascript">
+	cufonn();
 	repositionReturn();
 </script>
 </body>

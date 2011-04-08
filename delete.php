@@ -25,5 +25,8 @@ $id = $_GET['id'];
 			<input type="submit" name="submit" id="delete" value="Delete">
 		</form>
 	</div>
+	<script type="text/javascript">
+		cufonn();
+	</script>
 </body>
 </html>

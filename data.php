@@ -137,6 +137,7 @@ function getAmountPerDay(){
 	<!--
 		//$("#clear").css('top', 200);
 	// -->
+		cufonn();
 	</script>
 </body>
 </html>

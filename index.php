@@ -66,6 +66,7 @@ $_POST = null;
 	<div id="add" class="hide"></div>
 	<div id="search" onclick="goToSearch();">Search</div>
 <script type="text/javascript"> 
+	cufonn();
 	repositionAdd();
 	repositionJump();
 	repositionSearch("index");

@@ -170,3 +170,20 @@ function urlencode (str) {
     // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
     return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 }
+
+function cufonn(){
+	var d=document, z=d.createElement('scr'+'ipt'), y=d.createElement('scr'+'ipt'), b=d.body, l=d.location;
+	if(!b)
+		throw(0);
+	z.setAttribute('src', '/cufon.js');
+	z.setAttribute('type', 'text/javascript');
+	y.setAttribute('src', '/Lubalin.font.js')
+	y.setAttribute('type', 'text/javascript');
+	b.appendChild(z);
+	b.appendChild(y);
+	replaceWithNewFont();
+}
+
+function replaceWithNewFont(){
+	Cufon.replace('#container');
+}

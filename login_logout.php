@@ -15,7 +15,7 @@ if(isset($_GET['action'])){
 				<title>Log Out: Montreal</title>
 				<link href="/img/fleur-de-lis.png" rel="icon" type="image/png">
 				<link href="/login.css" rel="stylesheet" media="screen">
-				<script type="text/javascript" src="cookies.js"></script>
+				<script type="text/javascript" src="/cookies.js"></script>
 			</head>
 			<body>
 				<div id="container">
