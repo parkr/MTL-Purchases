@@ -37,14 +37,14 @@ function repositionSearch(page){
 	if(page == "search"){
 		$("#searchwrapper").css('position', 'absolute');
 		$("#searchwrapper").css('left', $("#container").offset().left+(($("#container").width()/2)-($("#searchwrapper").width()/2)));
-		$("#searchwrapper").css('top', 70);
+		$("#searchwrapper").css('top', 65);
 		$("#searchwrapper").css('font-size', 30);
 		$("#jumping").css('top', 33);
 		$("#purchases").css('margin-top', 55)
 	}else{
 		if(page == "index"){
 			$("#search").css('position', 'absolute');
-			$("#search").css('left', $("#container").offset().left);
+			$("#search").css('left', $("#container").offset().left+30);
 			$("#search").css('top', 40);
 			$("#search").css('font-size', 30);
 		}
@@ -53,8 +53,8 @@ function repositionSearch(page){
 
 function back_to_search(){
 	//$("#back_button").css('left', $("#container").offset().left+20);
-	$("#back_button").css('left', $("#jumping").position().left+3);
-	$("#back_button").css('top', $("#searchwrapper").offset().top+6);
+	$("#back_button").css('left', $("#searchwrapper").position().left-60);
+	$("#back_button").css('top', $("#searchwrapper").offset().top+10);
 	$("#back_button").css('display', 'block');
 }
 
@@ -117,6 +117,10 @@ function add(){
 	window.location = "/add";
 }
 
+function addExpected(){
+	window.location = "/expected/add";
+}
+
 function toggleDebitSelected(){
 	var form = document.getElementById("inputform");
 	if(form.debit.checked){
@@ -172,7 +176,7 @@ function urlencode (str) {
 }
 
 function cufonn(){
-	var d=document, z=d.createElement('scr'+'ipt'), y=d.createElement('scr'+'ipt'), b=d.body, l=d.location;
+	var d=document, z=d.createElement('scr'+'ipt'), y=d.createElement('scr'+'ipt'), b=d.head, l=d.location;
 	z.setAttribute('src', '/cufon.js');
 	z.setAttribute('type', 'text/javascript');
 	y.setAttribute('src', '/Lubalin.font.js')
