@@ -28,9 +28,8 @@ function repositionJump(){
 
 function repositionReturn(){
 	$("#return").css('position', 'absolute');
-	$("#return").css('left', $("#container").offset().left+430);
+	$("#return").css('left', $("#container").offset().left+360);
 	$("#return").css('top', 550);
-	$("#return").css('font-size', 30);
 }
 
 function repositionSearch(page){

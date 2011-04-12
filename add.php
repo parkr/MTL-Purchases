@@ -95,7 +95,7 @@ foreach ($_GET as $key => $value){
 </table>
 </form>
 </div>
-<div id="return"><a href="/">Return</a></div>
+<div id="return"><p><a href="/">Return</a></p></div>
 <script type="text/javascript">
 	cufonn();
 	repositionReturn();
@@ -191,7 +191,7 @@ if(isset($_GET['edit'])): ?>
 </table>
 </form>
 </div>
-<div id="return"><a href="/">Return</a></div>
+<div id="return"><p><a href="/">Return</a></p></div>
 <script type="text/javascript">
 	cufonn();
 	repositionReturn();

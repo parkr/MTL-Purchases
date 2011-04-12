@@ -74,6 +74,49 @@ table#purchases {
 	width:600px;
 }
 
+#return {
+	/*basic styles*/
+	width: 250px;  height: 70px;  color: #fff; background-color: #000;
+	text-align: center;  font-size: 30px;  /*line-height: 50px;*/
+
+	/*gradient styles*/
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2f2f2f), color-stop(.5, #1e1f1f), color-stop(.51, #0c0c0c), to(#000));
+	background: -moz-linear-gradient(top, #2f2f2f, #1e1f1f 50%, #0c0c0c 51%, #000);  
+
+	/*border styles*/
+	border-top: solid 2px #555;
+	border-bottom: solid 2px #111;
+
+	-moz-box-shadow:inset 0 0 15px #000000;
+	-webkit-box-shadow:inset 0 0 15px #000000;
+	box-shadow:inset 0 0 15px #000000;
+}
+
+
+#return p {
+	font-size: 30px;
+	/*line-height: 70px;*/
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 300;
+	text-shadow: 0px 0px 3px #888;
+	margin: 0.60em;
+}
+
+#return a {
+	text-decoration: none;
+	color: #fff;
+}
+
+#return:hover {
+	-moz-box-shadow:inset 0 0 50px #000000;
+	-webkit-box-shadow:inset 0 0 50px #000000;
+	box-shadow:inset 0 0 50px #000000;
+}
+
+#return p:hover {
+	text-shadow: 0px 0px 3px #444;
+}
+
 /************************* MISC ***************************/
 .centered {
 	text-align: center;
