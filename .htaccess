@@ -20,6 +20,10 @@ RewriteRule ^search$ /search.php [L]
 RewriteRule ^search/([a-zA-Z0-9%+-_]*)/$ /search.php?q=$1 [L]
 RewriteRule ^search/?q=([a-zA-Z0-9%+-_]*)$ /search.php?q=$1 [L]
 RewriteRule ^data$ /data.php [L]
+RewriteRule ^expected$ /expected.php?action=view [L]
+RewriteRule ^expected/$ /expected.php?action=view [L]
+RewriteRule ^expected/add$ /expected.php?action=add [L]
+RewriteRule ^expected/submit$ /expected.php?action=submit [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

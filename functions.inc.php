@@ -105,6 +105,49 @@ function processPurchases($result, $stringTableFormat = false, $baseTab = "", $s
 	}
 }
 
+# result must be a valid mysql result
+function processExpected($result, $baseTab = ""){
+	/* 1. Parse $result into a usable data structure (array)
+	 * 2. Print data to screen!
+	 */
+	if(is_resource($result)){
+		$expected = array();
+		$output = "";
+		$output .= ("<tr class='actions'>\n".$baseTab."\t<th scope=\"col\" width='100'>month</th>\n".$baseTab."\t<th scope=\"col\">purpose</th>\n".$baseTab."\t<th scope=\"col\">item</th>\n".$baseTab."\t<th scope=\"col\">cost</th>\n".$baseTab."\t<th scope=\"col\">actions</th>\n".$baseTab."</tr>\n");
+		for($j=0; $j<mysql_num_rows($result); $j++){
+			$expected[$j]['id'] = mysql_result($result, $j, 'id');
+			$expected[$j]['month'] = mysql_result($result, $j, 'month');
+			$expected[$j]['item'] = mysql_result($result, $j, 'item');
+			$expected[$j]['purpose'] = mysql_result($result, $j, 'purpose');
+			$expected[$j]['cost'] = mysql_result($result, $j, 'cost');
+			$expected[$j]['actions'] = array('edit' => '/expected/edit:'.$expected[$j]['id'], 'delete' => '', 'delete' => '/expected/delete:'.$expected[$j]['id'], 'commit' => '/add?exp='.$expected[$j]['id']);
+			$output .= ($baseTab . "<tr>\n");
+			$output .= ($baseTab . "\t<td>" . formatExpectedMonth($expected[$j]['month'])."</td>\n");
+			$output .= ($baseTab . "\t<td>" . $expected[$j]['purpose']."</td>\n");
+			$output .= ($baseTab . "\t<td>" . $expected[$j]['item']."</td>\n");
+			$output .= ($baseTab . "\t<td>" . $expected[$j]['cost']."</td>\n");
+			$output .= ($baseTab . "\t<td>" . formatExpectedActions($expected[$j]['actions'])."</td>\n");
+			$output .= ($baseTab . "</tr>\n");
+		}
+		echo $output;
+		return $expected;
+	}
+}
+
+function formatExpectedMonth($month_num){
+	return date("F", mktime(0, 0, 0, $month_num, 1, 2011));
+}
+
+# returns string output of links for actions
+function formatExpectedActions($actions){
+	$actionOutput = "";
+	//$actionOutput .= '<a href="'.$actions['before'].'" alt="view transactions before this one" title="view transactions before this one">&laquo;</a> ';
+	$actionOutput .= '<a href="'.$actions['edit'].'" alt="edit this transaction" title="edit this transaction">&#20462;</a> ';
+	$actionOutput .= '<a href="'.$actions['delete'].'">&times;</a> ';
+	$actionOutput .= '<a href="'.$actions['commit'].'" alt="commit as an expense" title="commit as an expense">&rarr;</a>';
+	return $actionOutput;
+}
+
 # formats the date from the MySQL DATETIME format a more readable version
 # e.g. "2010-10-10 10:10:10" is converted to "Oct, 10"
 function formatDate($date){
@@ -208,12 +251,13 @@ function printBusinessesinForm($selected = ""){
 function jumpMenu(){
 	$output = '<form name="form" id="form">
 	  <select name="jumpMenu" id="jumpMenu" onchange="jump(\'parent\',this,0)">
-		<option value="">-- Select --</option>
+		<option value="/expected">Expected</option>
+		<option value="/search">Search</option>
+		<option value="" selected="selected">-- Select --</option>
 	    <option value="/">DESC: Order By Date</option>
 	    <option value="/asc">ASC: Order By Date</option>
 		<option value="/fall-2010">Fall 2010</option>
 		<option value="/winter-2011">Winter 2011</option>
-		<option value="/search">Search</option>
 		<option value="/logout">Logout</option>
 	  </select>
 	</form>';
