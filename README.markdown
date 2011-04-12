@@ -15,10 +15,10 @@ Make a very simple way to view, edit, add, delete, sort and search through MySQL
 2. Further refine "expected" page.
 	- add actions:
 		1. commit
-			1. get rid of entry in "expected"
-			2. populate form in /add
+			- get rid of entry in "expected"
+			- populate form in /add
 		2. delete
 		3. edit
-			1. create interface
-			2. create functions
+			- create interface
+			- create functions
 	- reformat table to get rid of some of that space
