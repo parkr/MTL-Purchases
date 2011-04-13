@@ -183,3 +183,11 @@ function cufonn(){
 	b.appendChild(z);
 	b.appendChild(y);
 }
+
+function really(path){
+	var r = confirm('Are you sure?');
+	if(r==true){
+		window.location = path;
+	}
+	
+}

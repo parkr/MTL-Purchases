@@ -143,7 +143,7 @@ function formatExpectedActions($actions){
 	$actionOutput = "";
 	//$actionOutput .= '<a href="'.$actions['before'].'" alt="view transactions before this one" title="view transactions before this one">&laquo;</a> ';
 	$actionOutput .= '<a href="'.$actions['edit'].'" alt="edit this transaction" title="edit this transaction">&#20462;</a> ';
-	$actionOutput .= '<a href="'.$actions['delete'].'">&times;</a> ';
+	$actionOutput .= '<a href="#" onclick="really(\''.$actions['delete'].'\')">&times;</a> ';
 	$actionOutput .= '<a href="'.$actions['commit'].'" alt="commit as an expense" title="commit as an expense">&rarr;</a>';
 	return $actionOutput;
 }

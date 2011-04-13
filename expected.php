@@ -45,17 +45,15 @@ if($_GET['action'] == "view"){
 			echo "Submitting...";
 			$query = "INSERT INTO `".EXPECTED_TABLE."` (`id`, `month`, `item`, `purpose`, `cost`) VALUES ";
 			$query .= "(NULL, '".$_POST['month']."', '".$_POST['item']."', '".$_POST['purpose']."', '".$_POST['cost']."')";
-			mysql_query($query);
+			mysql_query($query) or die(mysql_error());
 			echo "done.";
 			returnInThree("/expected");
 		}elseif($_POST['action'] == "edit"){
 			echo "Updating...";
 			$query = "UPDATE `".EXPECTED_TABLE."` SET `purpose` = '".$_POST['purpose']."', `month`='".$_POST['month']."', `item`='".$_POST['item']."', `cost`=".$_POST['cost']." WHERE `id`=".$_POST['id'];
-			//echo $query;
 			mysql_query($query) or die(mysql_error());
 			echo "done.";
 			returnInThree("/expected");
-			//print_r($_POST);
 		}else{
 			echo "<br />Error.";
 		}
@@ -65,6 +63,12 @@ if($_GET['action'] == "view"){
 	}
 }elseif($_GET['edit'] && $_GET['edit'] != ""){
 	expectedAddEditForm($_GET['edit']);
+}elseif($_GET['delete'] && $_GET['delete'] != ""){
+	echo "Deleting...";
+	$query = "DELETE FROM `".EXPECTED_TABLE."` WHERE `id`=".$_GET['delete'];
+	mysql_query($query) or die(mysql_error());
+	echo "done.";
+	returnInThree("/expected");
 }
 
 ?>
