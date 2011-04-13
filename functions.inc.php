@@ -148,6 +148,82 @@ function formatExpectedActions($actions){
 	return $actionOutput;
 }
 
+function getExpected($id){
+	include_once("db.inc.php");
+	$query = "SELECT * FROM `".EXPECTED_TABLE."` WHERE `id`=".$id;
+	$result = mysql_query($query);
+	$expected = array();
+	$expected['id'] = mysql_result($result, 0, 'id');
+	$expected['month'] = mysql_result($result, 0, 'month');
+	$expected['item'] = mysql_result($result, 0, 'item');
+	$expected['purpose'] = mysql_result($result, 0, 'purpose');
+	$expected['cost'] = mysql_result($result, 0, 'cost');
+	return $expected;
+}
+
+function expectedAddEditForm($edit=0){
+	if($edit == 0){
+		echo "<div id=\"form_expected\">\n";
+		echo "<form id=\"form_expected\" method=\"post\" action=\"/expected/submit\">\n";
+		echo "\t<select name=\"month\">\n";
+		echo "\t\t<option value=\"01\">January</option>\n";
+		echo "\t\t<option value=\"02\">February</option>\n";
+		echo "\t\t<option value=\"03\">March</option>\n";
+		echo "\t\t<option value=\"04\">April</option>\n";
+		echo "\t\t<option value=\"05\">May</option>\n";
+		echo "\t\t<option value=\"06\">June</option>\n";
+		echo "\t\t<option value=\"07\">July</option>\n";
+		echo "\t\t<option value=\"08\">August</option>\n";
+		echo "\t\t<option value=\"09\">September</option>\n";
+		echo "\t\t<option value=\"10\">October</option>\n";
+		echo "\t\t<option value=\"11\">November</option>\n";
+		echo "\t\t<option value=\"12\">December</option>\n";
+		echo "\t</select><br />\n";
+		echo "\tItem:<input type=\"text\" name=\"item\"><br />\n";
+		echo "\tPurpose:<input type=\"text\" name=\"purpose\"><br />\n";
+		echo "\tCost: <input type=\"text\" name=\"cost\"><br />\n";
+		echo "\t<input type=\"hidden\" name=\"action\" value=\"add\">\n";
+		echo "\t<input type=\"submit\" value=\"Add\">\n";
+		echo "</form>\n";
+		echo "</div>\n";
+	}else{
+		$expected = getExpected($edit);
+		echo "<div id=\"form_expected\">\n";
+		echo "<form id=\"form_expected\" method=\"post\" action=\"/expected/submit\">\n";
+		echo "\t<select name=\"month\">\n";
+		echo "\t\t<option value=\"01\"".(($expected['month'] == 1) ? "selected=\"selected\"" : "").">January</option>\n";
+		echo "\t\t<option value=\"02\"".(($expected['month'] == 2) ? "selected=\"selected\"" : "").">February</option>\n";
+		echo "\t\t<option value=\"03\"".(($expected['month'] == 3) ? "selected=\"selected\"" : "").">March</option>\n";
+		echo "\t\t<option value=\"04\"".(($expected['month'] == 4) ? "selected=\"selected\"" : "").">April</option>\n";
+		echo "\t\t<option value=\"05\"".(($expected['month'] == 5) ? "selected=\"selected\"" : "").">May</option>\n";
+		echo "\t\t<option value=\"06\"".(($expected['month'] == 6) ? "selected=\"selected\"" : "").">June</option>\n";
+		echo "\t\t<option value=\"07\"".(($expected['month'] == 7) ? "selected=\"selected\"" : "").">July</option>\n";
+		echo "\t\t<option value=\"08\"".(($expected['month'] == 8) ? "selected=\"selected\"" : "").">August</option>\n";
+		echo "\t\t<option value=\"09\"".(($expected['month'] == 9) ? "selected=\"selected\"" : "").">September</option>\n";
+		echo "\t\t<option value=\"10\"".(($expected['month'] == 10) ? "selected=\"selected\"" : "").">October</option>\n";
+		echo "\t\t<option value=\"11\"".(($expected['month'] == 11) ? "selected=\"selected\"" : "").">November</option>\n";
+		echo "\t\t<option value=\"12\"".(($expected['month'] == 12) ? "selected=\"selected\"" : "").">December</option>\n";
+		echo "\t</select><br />\n";
+		echo "\tItem:<input type=\"text\" name=\"item\" value=\"".$expected['item']."\"><br />\n";
+		echo "\tPurpose:<input type=\"text\" name=\"purpose\" value=\"".$expected['purpose']."\"><br />\n";
+		echo "\tCost: <input type=\"text\" name=\"cost\" value=\"".$expected['cost']."\"><br />\n";
+		echo "\t<input type=\"hidden\" name=\"action\" value=\"edit\">\n";
+		echo "\t<input type=\"hidden\" name=\"id\" value=\"".$edit."\">\n";
+		echo "\t<input type=\"submit\" value=\"Edit\">\n";
+		echo "</form>\n";
+		echo "</div>\n";
+	}
+}
+
+function returnInThree($path){
+	echo "<script type='text/javascript'>\n";
+	echo "\tfunction delayedRedirect(){
+	    window.location = '".$path."';
+	}\n";
+	echo "\tsetTimeout('delayedRedirect()', 2000);\n";
+	echo "</script>";
+}
+
 # formats the date from the MySQL DATETIME format a more readable version
 # e.g. "2010-10-10 10:10:10" is converted to "Oct, 10"
 function formatDate($date){

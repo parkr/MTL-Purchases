@@ -14,12 +14,12 @@ if(!session_open()){
 <script src="http://code.jquery.com/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/mtl.js" type="text/javascript"></script>
 <style type="text/css">
-	div#add_expected {
+	div#form_expected {
 		margin: 0 auto;
 		width: 250px;
 		text-align: center;
 	}
-	div#add_expected input, div#add_expected select{
+	div#form_expected input, div#form_expected select{
 		font-size: 20px;
 	}
 </style>
@@ -36,43 +36,35 @@ if($_GET['action'] == "view"){
 	$query = "SELECT * FROM `".EXPECTED_TABLE."` ORDER BY `id` DESC";
 	$result = mysql_query($query) or die(mysql_error());
 	processExpected($result, "\t");
-	echo "Viewing.";
 	echo "</table>";
 }elseif($_GET['action'] == "add"){
-	echo "<div id=\"add_expected\">\n";
-	echo "<form id=\"add_expected\" method=\"post\" action=\"/expected/submit\">\n";
-	echo "\t<select name=\"month\">\n";
-	echo "\t\t<option value=\"01\">January</option>\n";
-	echo "\t\t<option value=\"02\">February</option>\n";
-	echo "\t\t<option value=\"03\">March</option>\n";
-	echo "\t\t<option value=\"04\">April</option>\n";
-	echo "\t\t<option value=\"05\">May</option>\n";
-	echo "\t\t<option value=\"06\">June</option>\n";
-	echo "\t\t<option value=\"07\">July</option>\n";
-	echo "\t\t<option value=\"08\">August</option>\n";
-	echo "\t\t<option value=\"09\">September</option>\n";
-	echo "\t\t<option value=\"10\">October</option>\n";
-	echo "\t\t<option value=\"11\">November</option>\n";
-	echo "\t\t<option value=\"12\">December</option>\n";
-	echo "\t</select><br />\n";
-	echo "\tItem:<input type=\"text\" name=\"item\"><br />\n";
-	echo "\tPurpose:<input type=\"text\" name=\"purpose\"><br />\n";
-	echo "\tCost: <input type=\"text\" name=\"cost\"><br />\n";
-	echo "\t<input type=\"submit\" value=\"Add\">\n";
-	echo "</form>\n";
-	echo "</div>\n";
+	expectedAddEditForm();
 }elseif($_GET['action'] == "submit"){
-	echo "Submitting.";
 	if($_POST){
-		print_r($_POST);
-		$query = "INSERT INTO `".EXPECTED_TABLE."` (`id`, `month`, `item`, `purpose`, `cost`) VALUES (NULL, '".$_POST['month']."', '".$_POST['item']."', '".$_POST['purpose']."', '".$_POST['cost']."')";
-		mysql_query($query);
-		echo "<br/>Completed.";
+		if($_POST['action'] == "add"){
+			echo "Submitting...";
+			$query = "INSERT INTO `".EXPECTED_TABLE."` (`id`, `month`, `item`, `purpose`, `cost`) VALUES ";
+			$query .= "(NULL, '".$_POST['month']."', '".$_POST['item']."', '".$_POST['purpose']."', '".$_POST['cost']."')";
+			mysql_query($query);
+			echo "done.";
+			returnInThree("/expected");
+		}elseif($_POST['action'] == "edit"){
+			echo "Updating...";
+			$query = "UPDATE `".EXPECTED_TABLE."` SET `purpose` = '".$_POST['purpose']."', `month`='".$_POST['month']."', `item`='".$_POST['item']."', `cost`=".$_POST['cost']." WHERE `id`=".$_POST['id'];
+			//echo $query;
+			mysql_query($query) or die(mysql_error());
+			echo "done.";
+			returnInThree("/expected");
+			//print_r($_POST);
+		}else{
+			echo "<br />Error.";
+		}
 		$_POST = null;
 	}else{
-		echo "<br/>You need to submit a form, first.";
+		echo "You need to submit a form, first.";
 	}
-	
+}elseif($_GET['edit'] && $_GET['edit'] != ""){
+	expectedAddEditForm($_GET['edit']);
 }
 
 ?>

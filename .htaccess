@@ -23,6 +23,8 @@ RewriteRule ^data$ /data.php [L]
 RewriteRule ^expected$ /expected.php?action=view [L]
 RewriteRule ^expected/$ /expected.php?action=view [L]
 RewriteRule ^expected/add$ /expected.php?action=add [L]
+RewriteRule ^expected/edit:([a-zA-Z0-9]*)$ /expected.php?edit=$1 [L]
+RewriteRule ^expected/delete:([a-zA-Z0-9]*)$ /expected.php?delete=$1 [L]
 RewriteRule ^expected/submit$ /expected.php?action=submit [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
