@@ -42,7 +42,7 @@ if($_GET['action'] == "view"){
 	processExpected($result, "\t");
 	echo "</table>";
 }elseif($_GET['action'] == "add"){
-	expectedAddEditForm();
+	printExpectedForm();
 }elseif($_GET['action'] == "submit"){
 	if($_POST){
 		if($_POST['action'] == "add"){
@@ -66,7 +66,7 @@ if($_GET['action'] == "view"){
 		echo "You need to submit a form, first.";
 	}
 }elseif($_GET['edit'] && $_GET['edit'] != ""){
-	expectedAddEditForm($_GET['edit']);
+	printExpectedForm($_GET['edit']);
 }elseif($_GET['delete'] && $_GET['delete'] != ""){
 	echo "Deleting...";
 	$query = "DELETE FROM `".EXPECTED_TABLE."` WHERE `id`=".$_GET['delete'];

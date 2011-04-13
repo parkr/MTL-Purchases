@@ -161,23 +161,24 @@ function getExpected($id){
 	return $expected;
 }
 
-function expectedAddEditForm($edit=0){
+function printExpectedForm($edit=0){
 	if($edit == 0){
 		echo "<div id=\"form_expected\">\n";
 		echo "<form id=\"form_expected\" method=\"post\" action=\"/expected/submit\">\n";
-		echo "\t<select name=\"month\">\n";
-		echo "\t\t<option value=\"01\">January</option>\n";
-		echo "\t\t<option value=\"02\">February</option>\n";
-		echo "\t\t<option value=\"03\">March</option>\n";
-		echo "\t\t<option value=\"04\">April</option>\n";
-		echo "\t\t<option value=\"05\">May</option>\n";
-		echo "\t\t<option value=\"06\">June</option>\n";
-		echo "\t\t<option value=\"07\">July</option>\n";
-		echo "\t\t<option value=\"08\">August</option>\n";
-		echo "\t\t<option value=\"09\">September</option>\n";
-		echo "\t\t<option value=\"10\">October</option>\n";
-		echo "\t\t<option value=\"11\">November</option>\n";
-		echo "\t\t<option value=\"12\">December</option>\n";
+		$month = date("n");
+		echo "\t<select name=\"month\" month=\"".$month."\">\n";
+		echo "\t\t<option value=\"01\"".(($month == 1) ? "selected=\"selected\"" : "").">January</option>\n";
+		echo "\t\t<option value=\"02\"".(($month == 2) ? "selected=\"selected\"" : "").">February</option>\n";
+		echo "\t\t<option value=\"03\"".(($month == 3) ? "selected=\"selected\"" : "").">March</option>\n";
+		echo "\t\t<option value=\"04\"".(($month == 4) ? "selected=\"selected\"" : "").">April</option>\n";
+		echo "\t\t<option value=\"05\"".(($month == 5) ? "selected=\"selected\"" : "").">May</option>\n";
+		echo "\t\t<option value=\"06\"".(($month == 6) ? "selected=\"selected\"" : "").">June</option>\n";
+		echo "\t\t<option value=\"07\"".(($month == 7) ? "selected=\"selected\"" : "").">July</option>\n";
+		echo "\t\t<option value=\"08\"".(($month == 8) ? "selected=\"selected\"" : "").">August</option>\n";
+		echo "\t\t<option value=\"09\"".(($month == 9) ? "selected=\"selected\"" : "").">September</option>\n";
+		echo "\t\t<option value=\"10\"".(($month == 10) ? "selected=\"selected\"" : "").">October</option>\n";
+		echo "\t\t<option value=\"11\"".(($month == 11) ? "selected=\"selected\"" : "").">November</option>\n";
+		echo "\t\t<option value=\"12\"".(($month == 12) ? "selected=\"selected\"" : "").">December</option>\n";
 		echo "\t</select><br />\n";
 		echo "\tItem:<input type=\"text\" name=\"item\"><br />\n";
 		echo "\tPurpose:<input type=\"text\" name=\"purpose\"><br />\n";
