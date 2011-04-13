@@ -1,4 +1,4 @@
-# A PHP Web App that allows me to view my Montreal purchases all in one place.
+# A PHP Web App that allows me to manage my purchases all in one place.
 
 ## Idea:
 
