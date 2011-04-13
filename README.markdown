@@ -13,12 +13,4 @@ Make a very simple way to view, edit, add, delete, sort and search through MySQL
 	4. Store that's profited the most from me (where I\'ve spent the most money)
 	5. Graph of daily/weekly spending
 2. Further refine "expected" page.
-	- add actions:
-		1. commit
-			- get rid of entry in "expected"
-			- populate form in /add
-		2. delete
-		3. edit
-			- create interface
-			- create functions
 	- reformat table to get rid of some of that space
