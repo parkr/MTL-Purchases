@@ -11,7 +11,17 @@ foreach ($_POST as $key => $value) {
 foreach ($_GET as $key => $value){
 	$_GET[$key] = mysql_real_escape_string($value);
 }
- if(isset($_GET['new'])): ?>
+ if(isset($_GET['new'])): 
+	if($_GET['exp'] && $_GET['exp'] != ""){
+		// Sent a url like this: /add/(id)
+		// Get it!
+		$exp = true;
+		$expected = getExpected($_GET['exp']);
+		// Delete it!
+		$query = "DELETE FROM `".EXPECTED_TABLE."` WHERE `id`=".$_GET['exp'];
+		mysql_query($query) or die(mysql_error());
+	}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -76,16 +86,16 @@ foreach ($_GET as $key => $value){
   <tr>
     <td>Amount:</td>
     <td>$
-      <input type="text" name="amount" id="amount" /></td>
+      <input type="text" name="amount" id="amount" value="<? echo ($exp) ? $expected['cost'] : ""; ?>" /></td>
   </tr>
   <tr>
     <td>Purpose:</td>
-    <td><textarea name="purpose" id="purpose" cols="45" rows="5"></textarea><br/>
+    <td><textarea name="purpose" id="purpose" cols="45" rows="5"><?php echo ($exp) ? $expected['purpose'] : "" ; ?></textarea><br/>
       <span class="footnote">(comma-separated)</span></td>
   </tr>
   <tr>
     <td>Items:</td>
-    <td><textarea name="items" id="items" cols="45" rows="5"></textarea><br/>
+    <td><textarea name="items" id="items" cols="45" rows="5"><?php echo ($exp) ? $expected['item'] : "" ; ?></textarea><br/>
       <span class="footnote">(comma-separated)</span></td>
   </tr>
   	<tr>

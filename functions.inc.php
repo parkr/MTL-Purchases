@@ -120,7 +120,7 @@ function processExpected($result, $baseTab = ""){
 			$expected[$j]['item'] = mysql_result($result, $j, 'item');
 			$expected[$j]['purpose'] = mysql_result($result, $j, 'purpose');
 			$expected[$j]['cost'] = mysql_result($result, $j, 'cost');
-			$expected[$j]['actions'] = array('edit' => '/expected/edit:'.$expected[$j]['id'], 'delete' => '', 'delete' => '/expected/delete:'.$expected[$j]['id'], 'commit' => '/add?exp='.$expected[$j]['id']);
+			$expected[$j]['actions'] = array('edit' => '/expected/edit:'.$expected[$j]['id'], 'delete' => '/expected/delete:'.$expected[$j]['id'], 'commit' => '/expected/commit:'.$expected[$j]['id']);
 			$output .= ($baseTab . "<tr>\n");
 			$output .= ($baseTab . "\t<td>" . formatExpectedMonth($expected[$j]['month'])."</td>\n");
 			$output .= ($baseTab . "\t<td>" . $expected[$j]['purpose']."</td>\n");
